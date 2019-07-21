@@ -1,11 +1,27 @@
 #!/bin/bash
 
-if [ "$1" == "-h" ] || [ "$1" == "--help" ] || [ $# -lt 4 ]; then
-	echo "usage : otf2psf (FONT SIZE) (WEIGHT(1~, integer)) (CHARACTER SET(Uni1~3)) (OTF OR TTF FILE NAME)"
+# otf2psf : Converts OpenType(OTF) Font and TrueType(TTF) Font into PC Screen Font(PSF)
+# Author : Ji-Hong Park
+#######################################################################################
+# Useful for glorious TTY users with need for fonts with better readability.
+# Still supports basic conversion, without options from otf2bdf and bdf2psf. TBD
+
+#ANSI Escape Code for PRETTIER help message.
+RED='\033[0;31m'
+NC='\033[0m'
+
+#Determine whether to call help or not, and can be used for argument error message
+if [ "$1" == "-h" ] || [ "$1" == "--help" ] || [ $# -ne 4 ]; then
+
+	printf "usage : otf2psf (FONT SIZE) (WEIGHT) (CHARACTER SET) (OTF/TTF FILE NAME)\n\n"
+	printf "\tFONT SIZE - Passes desired font size. If you see 'Bad font height' message when \n\t\t    using setfont command, you need less FONT SIZE.\n"
+	printf "\tWEIGHT - Higher WEIGHT will result wider font. ${RED}THIS VALUE MUST BE INTEGER${NC}.\n"
+	printf "\tCHARACTER SET - You can select character set the converted font support.\n\t\t\t${RED}Currently, Uni1 / Uni2 / Uni3 only${NC}.\n"
+	printf "\tOTF/TTF FILE NAME - Name of otf/ttf font file you want to convert. Converted psf\n\t\t\t    file will have the same name with otf/ttf file.\n\n"
+
 
 else
-	length=$((${#4}-3))
-	filename=${4:0:$length}
+	filename=${4:0:$((${#4}-3))}
 	bdffilename=$filename'bdf'
 	psffilename=$filename'psf'
 	charsetname=$3'.512'
@@ -13,16 +29,16 @@ else
 	otf2bdf -n -p "$1" -r 100 -o "$bdffilename" "$4"
 	
 	grepresult=$(grep -w "AVERAGE_WIDTH" "$bdffilename")
-	greplength=$((${#grepresult}-14))
-	width=${grepresult: $((-1*$greplength))}
+	width=${grepresult: $((-1*(${#grepresult}-14)))}
 	new_width=$((20+${width}-(${width}%10)+10*${2}))
-	sedd='s/AVERAGE_WIDTH.*/AVERAGE_WIDTH '$new_width'/'
 	
-	sed -e "$sedd" "$bdffilename" > temp
+	sed -e "s/AVERAGE_WIDTH.*/AVERAGE_WIDTH "$new_width"/" "$bdffilename" > temp
 	rm "$bdffilename"
 	mv temp "$bdffilename"
 
 	bdf2psf --fb "$bdffilename" /usr/share/bdf2psf/standard.equivalents /usr/share/bdf2psf/fontsets/"$charsetname" 512 "$psffilename"
+
+	rm "$bdffilename"
 
 fi
 

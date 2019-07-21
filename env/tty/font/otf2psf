@@ -1,0 +1,28 @@
+#!/bin/bash
+
+if [ "$1" == "-h" ] || [ "$1" == "--help" ] || [ $# -lt 4 ]; then
+	echo "usage : otf2psf (FONT SIZE) (WEIGHT(1~, integer)) (CHARACTER SET(Uni1~3)) (OTF OR TTF FILE NAME)"
+
+else
+	length=$((${#4}-3))
+	filename=${4:0:$length}
+	bdffilename=$filename'bdf'
+	psffilename=$filename'psf'
+	charsetname=$3'.512'
+
+	otf2bdf -n -p "$1" -r 100 -o "$bdffilename" "$4"
+	
+	grepresult=$(grep -w "AVERAGE_WIDTH" "$bdffilename")
+	greplength=$((${#grepresult}-14))
+	width=${grepresult: $((-1*$greplength))}
+	new_width=$((20+${width}-(${width}%10)+10*${2}))
+	sedd='s/AVERAGE_WIDTH.*/AVERAGE_WIDTH '$new_width'/'
+	
+	sed -e "$sedd" "$bdffilename" > temp
+	rm "$bdffilename"
+	mv temp "$bdffilename"
+
+	bdf2psf --fb "$bdffilename" /usr/share/bdf2psf/standard.equivalents /usr/share/bdf2psf/fontsets/"$charsetname" 512 "$psffilename"
+
+fi
+

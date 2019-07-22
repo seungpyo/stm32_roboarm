@@ -47,7 +47,7 @@ else
 	mv temp "$bdffilename"
 	
 	printf "Converting BDF file to PSF file\n"
-	bdf2psf --fb "$bdffilename" /usr/share/bdf2psf/standard.equivalents /usr/share/bdf2psf/fontsets/"$charsetname" 512 "$psffilename"
+	bdf2psf --fb "$bdffilename" /usr/share/bdf2psf/standard.equivalents /usr/share/bdf2psf/fontsets/"$charsetname" 512 "$psffilename" 2> /dev/null
 	
 	printf "Removing BDF file\n"
 	rm "$bdffilename"

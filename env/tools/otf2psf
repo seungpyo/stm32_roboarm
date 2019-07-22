@@ -35,7 +35,7 @@ else
 
 	charsetname=$3'.512'
 	
-	printf "Converting OTF/TTF file to BDF file first"
+	printf "Converting OTF/TTF file to BDF file first\n"
 	otf2bdf -n -p "$1" -r 100 -o "$bdffilename" "$4"
 	
 	grepresult=$(grep -w "AVERAGE_WIDTH" "$bdffilename")
@@ -46,10 +46,10 @@ else
 	rm "$bdffilename"
 	mv temp "$bdffilename"
 	
-	printf "Converting BDF file to PSF file"
+	printf "Converting BDF file to PSF file\n"
 	bdf2psf --fb "$bdffilename" /usr/share/bdf2psf/standard.equivalents /usr/share/bdf2psf/fontsets/"$charsetname" 512 "$psffilename"
 	
-	printf "Removing BDF file"
+	printf "Removing BDF file\n"
 	rm "$bdffilename"
 
 fi

@@ -17,11 +17,13 @@ if [ "$1" == "-h" ] || [ "$1" == "--help" ] || [ $# -ne 5 ]; then
 	printf "\tFONT SIZE - Passes desired font size. If you see 'Bad font height' message when \n\t\t    using setfont command, you need less FONT SIZE.\n"
 	printf "\tWEIGHT - Higher WEIGHT will result wider font. ${RED}THIS VALUE MUST BE INTEGER${NC}.\n"
 	printf "\tCHARACTER SET - You can select character set the converted font support.\n\t\t\t${RED}Currently, Uni1 / Uni2 / Uni3 only${NC}.\n"
+	
 	printf "\tOTF/TTF FILE NAME - Name of otf/ttf font file you want to convert.\n"
 	printf "\tOUTPUT FILE NAME - Name of output psf font file.\n\n"
 
 
 else
+	 
 	filename=${4:0:$((${#4}-3))}
 	bdffilename=$filename'bdf'
 	
@@ -32,7 +34,8 @@ else
 	fi
 
 	charsetname=$3'.512'
-
+	
+	printf "Converting OTF/TTF file to BDF file first"
 	otf2bdf -n -p "$1" -r 100 -o "$bdffilename" "$4"
 	
 	grepresult=$(grep -w "AVERAGE_WIDTH" "$bdffilename")
@@ -42,9 +45,11 @@ else
 	sed -e "s/AVERAGE_WIDTH.*/AVERAGE_WIDTH "$new_width"/" "$bdffilename" > temp
 	rm "$bdffilename"
 	mv temp "$bdffilename"
-
+	
+	printf "Converting BDF file to PSF file"
 	bdf2psf --fb "$bdffilename" /usr/share/bdf2psf/standard.equivalents /usr/share/bdf2psf/fontsets/"$charsetname" 512 "$psffilename"
-
+	
+	printf "Removing BDF file"
 	rm "$bdffilename"
 
 fi

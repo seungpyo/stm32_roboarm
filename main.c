@@ -92,9 +92,12 @@ static inline void gpio_write(volatile struct gpio * gpiox, gpio_pin_t pin, GPIO
 
 
 int main (void) {
-    while(1);
+    
+    asm volatile ("nop\n" "nop\n" "nop\n" "nop\n" "nop\n" "nop\n" "nop\n" "nop\n" "nop\n" "nop\n" "nop\n" "nop\n" "nop\n" "nop\n" "nop\n" "nop\n");
+
     struct gpio_config cfg = GPIO_CONFIG_DEFAULT_INITIALIZER;
     gpio_init(GPIOA, &cfg);
     gpio_write(GPIOA, 1<<5, GPIO_PIN_SET);
-    return 0;
+    // while(1);
+    // return 0;
 }

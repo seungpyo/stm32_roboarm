@@ -33,7 +33,7 @@ SECTIONS {
         . = ALIGN(4K);
         *(.text);
         *(.text.unlikely);
-    }
+    }>FLASH
 
     .rodata . : {
         *(.rodata);

@@ -20,5 +20,6 @@ start:
     .word 0x20000000
     .word main  // Reset Handler
     .word 0x0   // Other handler?
+    .space 0x4000-0xc, 0
 
 #endif /* __ASSEMBLER__ */

@@ -98,6 +98,6 @@ int main (void) {
     struct gpio_config cfg = GPIO_CONFIG_DEFAULT_INITIALIZER;
     gpio_init(GPIOA, &cfg);
     gpio_write(GPIOA, 1<<5, GPIO_PIN_SET);
-    // while(1);
+    while(1);
     // return 0;
 }

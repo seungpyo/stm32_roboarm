@@ -68,9 +68,6 @@ static void gpio_init(volatile struct gpio * gpiox, struct gpio_config * cfg) {
         tmp = cfg->mode & mask; // Turn on only the masked bits
         gpiox->MODER &= ~mask; // Turn off the masked bits
         gpiox->MODER |= tmp;
-        // TODO:
-        // Implement more configurations,
-        // such as alternate functions or analog mode
     }
 }
 
@@ -97,6 +94,10 @@ int main (void) {
 
     struct gpio_config cfg = GPIO_CONFIG_DEFAULT_INITIALIZER;
     gpio_init(GPIOA, &cfg);
+
+    uint32_t pos;
+    for (pos = 0; cfg->pin
+
     gpio_write(GPIOA, 1<<5, GPIO_PIN_SET);
     while(1);
     // return 0;

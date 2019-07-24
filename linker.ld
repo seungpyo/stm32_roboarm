@@ -30,7 +30,7 @@ SECTIONS {
 
     .text : {
         *(.boot.o);
-        . = ALIGN(4K);
+        /* . = ALIGN(4K); */
         *(.text);
         *(.text.unlikely);
     }>FLASH

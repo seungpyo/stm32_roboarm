@@ -1,11 +1,14 @@
 #include <stdint.h>
-#define SPI2 0x40003800
-#define SPI3 0x40003C00
 
-#define DAC1 0x40007000
-#define DAC1_CR (DAC1+0x00)
-#define DAC1_DOR1 (DAC1+0x2C)
-#define DAC1_DOR2 (DAC1+0x30)
+#define __REG volatile uint32_t *
+
+#define RCC_APB1ENR1 ((__REG)0x40021058)
+#define RCC_USART2EN_MASK (0x00020000)
+
+#define USART2_CR1 ((__REG)0x40004400)
+#define USART2_ISR ((__REG)0x4000441C)
+#define USART2_TDR ((__REG)0x40004428)
+#define USART_FLAG_TXE	((uint16_t) 0x0080)
 
 struct gpio {
     uint32_t MODER; // 0x00
@@ -87,18 +90,23 @@ static inline void gpio_write(volatile struct gpio * gpiox, gpio_pin_t pin, GPIO
     }
 }
 
+int puts(const char *str)
+{
+	while (*str) {
+		while (!(*(USART2_ISR) & USART_FLAG_TXE));
+		*(USART2_TDR) = *str++ & 0xFF;
+	}
+	return 0;
+}
+
 
 int main (void) {
+
+	*RCC_APB1ENR1 |= RCC_USART2EN_MASK;
+	*(USART2_CR1) = 0xC;
+	*(USART2_CR1) |= 0x2000;
+
+	puts("Hello World!");
     
-    asm volatile ("nop\n" "nop\n" "nop\n" "nop\n" "nop\n" "nop\n" "nop\n" "nop\n" "nop\n" "nop\n" "nop\n" "nop\n" "nop\n" "nop\n" "nop\n" "nop\n");
-
-    struct gpio_config cfg = GPIO_CONFIG_DEFAULT_INITIALIZER;
-    gpio_init(GPIOA, &cfg);
-
-    uint32_t pos;
-    for (pos = 0; cfg->pin
-
-    gpio_write(GPIOA, 1<<5, GPIO_PIN_SET);
-    while(1);
-    // return 0;
+	// while(1);
 }

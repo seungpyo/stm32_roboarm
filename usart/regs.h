@@ -60,6 +60,7 @@
 #define USART2_CR1 ((__REG)USART2)
 #define USART2_BRR ((__REG)(USART2 + 0x0C))
 #define USART2_ISR ((__REG)(USART2 + 0x1C))
+#define USART2_RDR ((__REG)(USART2 + 0x24))
 #define USART2_TDR ((__REG)(USART2 + 0x28))
 // USART masks
 #define USART_CR1_UE_MASK 0x1
@@ -67,5 +68,6 @@
 #define USART_CR1_TE_MASK 0x8
 #define USART_CR1_TXEIE_MASK ((uint16_t) 0x2000)
 #define USART_ISR_TXE_MASK	((uint16_t) 0x0080)
+#define USART_ISR_RXNE_MASK ((uint16_t) 0x0020)
 
 #endif /* _REGS_H */

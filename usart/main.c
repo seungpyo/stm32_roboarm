@@ -3,6 +3,12 @@
 #define USART_FREQ (4*1000000)
 #define USART_BAUD (9600)
 
+void * memset(void *b, int c, uint32_t len) {
+	for(int i = 0; i < len; i++) {
+		((char *)b)[i] = c;
+	}
+	return b;
+}
 
 /**
   * puts a character c through USART2.
@@ -11,6 +17,13 @@
 void usart_putc(const char c) {
 	while (!(*(USART2_ISR) & USART_ISR_TXE_MASK));
 	*(USART2_TDR) = (c & 0xFF);
+}
+
+char usart_getc(void) {
+	char c = 0;
+	while(!(*(USART2_ISR) & USART_ISR_RXNE_MASK));
+	c = *(USART2_RDR) & 0xFF;
+	return c;
 }
 
 /**
@@ -23,6 +36,18 @@ int usart_puts(const char *str) {
 		usart_putc(*str);
 		str++;
 		ret++;
+	}
+	return ret;
+}
+
+int usart_gets(char *buf) {
+	int ret = 0;
+	char c;
+	while (c = usart_getc()) {
+		if (c == '\n' || c == '\r' || c == ' ' || c == '\t') {
+			break;
+		}
+		buf[ret++] = c;
 	}
 	return ret;
 }
@@ -75,6 +100,12 @@ int main (void) {
 	led_init();
 	usart_init();
 	
-	usart_puts("Hello World!\r\n");
-	usart_println("Nice to meet you!");
+	char buf[128];
+	usart_println("Echo test");
+	while (1) {
+		usart_puts("> ");
+		usart_gets(buf);
+		usart_println(buf);
+		memset(buf, 0, 128);
+	} 	
 }

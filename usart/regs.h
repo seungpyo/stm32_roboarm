@@ -16,9 +16,19 @@
 #define GPIOH (0x48001C00)
 
 // GPIO Pin masks
-#define GPIO_PIN_MASK(n) (0x3 << (2*n))
+#define GPIO_PIN_MASK(pin, mask) (((mask)&0xF) << (2*(pin)))
+
+// GPIO mode mask;
+// this should be shifted to a given pin.
+#define GPIO_MODE_IN (0x0)
+#define GPIO_MODE_OUT (0x1)
+#define GPIO_MODE_AF (0x2)
+#define GPIO_MODE_ANALOG (0x3)
+// reset state is analog.
+#define GPIO_MODE_RESET (0x3)
 
 // GPIO Port A registers
+#define GPIOA_MODER ((__REG)(GPIOA))
 #define GPIOA_AFRL ((__REG)(GPIOA+0x20))
 #define GPIOA_AF_USART2_TX_MASK (0x00000700)
 #define GPIOA_AF_USART2_RX_MASK (0x00007000)
@@ -48,6 +58,7 @@
 // USART registers
 #define USART2 (0x40004400)
 #define USART2_CR1 ((__REG)USART2)
+#define USART2_BRR ((__REG)(USART2 + 0x0C))
 #define USART2_ISR ((__REG)(USART2 + 0x1C))
 #define USART2_TDR ((__REG)(USART2 + 0x28))
 // USART masks

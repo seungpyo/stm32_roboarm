@@ -12,8 +12,8 @@ void led_init() {
 
 void led_write_pin(int pin, int value) {
 	// Set GPIO pin to 01 (output)
-	*(GPIOC_MODER) &= ~GPIO_PIN_MASK(pin);
-	*(GPIOC_MODER) |= (0x1 << (2 * pin));
+	*(GPIOC_MODER) &= ~GPIO_PIN_MASK(pin, GPIO_MODE_RESET);
+	*(GPIOC_MODER) |= GPIO_PIN_MASK(pin, GPIO_MODE_OUT);
 	// Set pin value.
 	if (value == LED_ON) {
 		*(GPIOC_BSRR) |= (1<<pin);
@@ -31,10 +31,10 @@ void led_blink(int pin, int duration) {
 void led_4states(int state) {
 	
 	// Set GPIO PC8 to 01 (output)
-	*(GPIOC_MODER) &= ~GPIO_PIN_MASK(6);
-	*(GPIOC_MODER) |= (0x1 << (2*6));
-	*(GPIOC_MODER) &= ~GPIO_PIN_MASK(8);
-	*(GPIOC_MODER) |= (0x1 << (2*8));
+	*(GPIOC_MODER) &= ~GPIO_PIN_MASK(6, GPIO_MODE_RESET);
+	*(GPIOC_MODER) |= GPIO_PIN_MASK(6, GPIO_MODE_OUT);
+	*(GPIOC_MODER) &= ~GPIO_PIN_MASK(8, GPIO_MODE_RESET);
+	*(GPIOC_MODER) |= GPIO_PIN_MASK(8, GPIO_MODE_OUT);
 
 	led_write_pin(8, state&0x2 ? LED_ON : LED_OFF);
 	led_write_pin(6, state&0x1 ? LED_ON : LED_OFF);

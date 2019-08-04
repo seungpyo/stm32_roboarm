@@ -1,6 +1,7 @@
 rm -f *.o *.elf *.bin
 arm-none-eabi-as -mthumb -o boot.o boot.S 
-arm-none-eabi-gcc -g -ggdb3 -c -mthumb main.c led.c usart.c utils.c
-arm-none-eabi-ld -T"linker.ld" -o main.elf boot.o main.o led.o usart.o utils.o
+arm-none-eabi-gcc -g -ggdb3 -c -mthumb bsp_init.c main.c led.c usart.c utils.c irq.c debug.c
+
+arm-none-eabi-ld -T"linker.ld" -o main.elf boot.o bsp_init.o main.o led.o usart.o utils.o irq.o debug.o
 arm-none-eabi-objcopy -O binary main.elf main.bin
 

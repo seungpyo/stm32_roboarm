@@ -1,0 +1,6416 @@
+cscope 15 $HOME/stm32_roboarm/imu               0000045204
+	@led.c
+
+1 
+	~"ªgs.h
+"
+
+2 
+	~"Àd.h
+"
+
+8 
+	$Àd_öô
+() {
+
+10 *(
+RCC_AHB2ENR
+Ë|
+RCC_GPIOCEN_MASK
+;
+
+11 
+	}
+}
+
+13 
+	$Àd_wrôe_pö
+(
+pö
+, 
+vÆue
+) {
+
+15 *(
+GPIOC_MODER
+Ë&~
+	`GPIO_MODE_MASK
+(
+pö
+, 
+GPIO_MODE_RESET
+);
+
+16 *(
+GPIOC_MODER
+Ë|
+	`GPIO_MODE_MASK
+(
+pö
+, 
+GPIO_MODE_OUT
+);
+
+18 i‡(
+vÆue
+ =
+LED_ON
+) {
+
+19 *(
+GPIOC_BSRR
+Ë|(1<<
+pö
+);
+
+21 *(
+GPIOC_BRR
+Ë|(1<<
+pö
+);
+
+23 
+	}
+}
+
+25 
+	$Àd_blök
+(
+pö
+, 
+duøti⁄
+) {
+
+26 
+	`Àd_wrôe_pö
+(
+pö
+, 
+LED_ON
+);
+
+27 
+i
+ = 0 ; i < (1<<
+duøti⁄
+); i++);
+
+28 
+	`Àd_wrôe_pö
+(
+pö
+, 
+LED_OFF
+);
+
+29 
+	}
+}
+
+31 
+	$Àd_4°©es
+(
+°©e
+) {
+
+34 *(
+GPIOC_MODER
+Ë&~
+	`GPIO_MODE_MASK
+(6, 
+GPIO_MODE_RESET
+);
+
+35 *(
+GPIOC_MODER
+Ë|
+	`GPIO_MODE_MASK
+(6, 
+GPIO_MODE_OUT
+);
+
+36 *(
+GPIOC_MODER
+Ë&~
+	`GPIO_MODE_MASK
+(8, 
+GPIO_MODE_RESET
+);
+
+37 *(
+GPIOC_MODER
+Ë|
+	`GPIO_MODE_MASK
+(8, 
+GPIO_MODE_OUT
+);
+
+39 
+	`Àd_wrôe_pö
+(8, 
+°©e
+&0x2 ? 
+LED_ON
+ : 
+LED_OFF
+);
+
+40 
+	`Àd_wrôe_pö
+(6, 
+°©e
+&0x1 ? 
+LED_ON
+ : 
+LED_OFF
+);
+
+42 
+i
+ = 0; i < (1<<19); i++);
+
+43 
+	`Àd_wrôe_pö
+(8, 
+LED_OFF
+);
+
+44 
+	`Àd_wrôe_pö
+(6, 
+LED_OFF
+);
+
+46 
+i
+ = 0; i < (1<<13); i++);
+
+47 
+	}
+}
+
+	@led.h
+
+1 
+	~"ªgs.h
+"
+
+3 
+	#LED_OFF
+ 0
+
+	)
+
+4 
+	#LED_ON
+ 1
+
+	)
+
+6 
+Àd_öô
+();
+
+7 
+Àd_wrôe_pö
+(
+pö
+, 
+vÆue
+);
+
+8 
+Àd_blök
+(
+pö
+, 
+duøti⁄
+);
+
+9 
+Àd_4°©es
+(
+°©e
+);
+
+	@main.c
+
+1 
+	~"ªgs.h
+"
+
+2 
+	~"Àd.h
+"
+
+3 
+	~"ußπ.h
+"
+
+6 
+	$•i_öô
+() {
+
+9 *(
+RCC_APB2ENR
+Ë|
+RCC_SPI1EN_MASK
+;
+
+15 *(
+GPIOA_AFRL
+Ë|
+GPIOA_AF_SPI1_NSS_MASK
+;
+
+16 *(
+GPIO_MODER
+Ë&~
+	`GPIO_MODE_MASK
+(4, 
+GPIO_MODE_RESET
+);
+
+17 *(
+GPIO_MODER
+Ë|
+	`GPIO_AF_MASK
+(4, 
+GPIO_MODE_AF
+);
+
+19 *(
+GPIOA_AFRL
+Ë|
+GPIOA_AF_SPI1_SCK_MASK
+;
+
+20 *(
+GPIO_MODER
+Ë&~
+	`GPIO_MODE_MASK
+(5, 
+GPIO_MODE_RESET
+);
+
+21 *(
+GPIO_MODER
+Ë|
+	`GPIO_AF_MASK
+(5, 
+GPIO_MODE_AF
+);
+
+23 *(
+GPIOA_AFRL
+Ë|
+GPIOA_AF_SPI1_MISO_MASK
+;
+
+24 *(
+GPIO_MODER
+Ë&~
+	`GPIO_MODE_MASK
+(6, 
+GPIO_MODE_RESET
+);
+
+25 *(
+GPIO_MODER
+Ë|
+	`GPIO_AF_MASK
+(6, 
+GPIO_MODE_AF
+);
+
+27 *(
+GPIOA_AFRL
+Ë|
+GPIOA_AF_SPI1_MOSI_MASK
+;
+
+28 *(
+GPIO_MODER
+Ë&~
+	`GPIO_MODE_MASK
+(7, 
+GPIO_MODE_RESET
+);
+
+29 *(
+GPIO_MODER
+Ë|
+	`GPIO_AF_MASK
+(7, 
+GPIO_MODE_AF
+);
+
+32 *(
+SPI1_CR1
+Ë&~
+SPI_CR1_SPE_MASK
+;
+
+37 *(
+SPI1_CR1
+Ë&~
+SPI_CR1_BR_MASK
+;
+
+38 *(
+SPI1_CR1
+Ë|
+SPI_CR1_BR_DIV4_MASK
+;
+
+42 *(
+SPI1_CR1
+Ë|
+SPI_CR1_RXONLY_MASK
+;
+
+46 *(
+SPI1_CR1
+Ë&~
+SPI_CR1_LSBFIRST_MASK
+;
+
+49 *(
+SPI1_CR1
+Ë|
+SPI_CR1_SPE_MASK
+;
+
+50 
+	}
+}
+
+52 
+uöt16_t
+ 
+	$•i_ªcv
+() {
+
+54 
+uöt16_t
+ 
+d©a
+;
+
+56 !(*(
+SPI1_SR
+Ë& 
+SPI_SR_RXNE_MASK
+));
+
+58 
+d©a
+ = *(
+SPI1_DR
+);
+
+60  
+d©a
+;
+
+61 
+	}
+}
+
+63 
+	$maö
+ () {
+
+65 
+	`Àd_öô
+();
+
+66 
+	`ußπ_öô
+();
+
+67 
+	`•i_öô
+();
+
+69 
+uöt16_t
+ 
+•i_d©a
+;
+
+71 
+•i_d©a
+ = 
+	`•i_ªcv
+();
+
+72 
+	`ußπ_puts
+("IMU sent: ");
+
+74 
+	`ußπ_puts
+((
+•i_d©a
+ & 0xFF) + '0');
+
+76 
+	`ußπ_¥öén
+("");
+
+78 
+	}
+}
+
+	@regs.h
+
+1 #i‚de‡
+_REGS_H
+
+
+2 
+	#_REGS_H
+
+
+	)
+
+4 
+	~<°döt.h
+>
+
+8 
+	#__REG
+ vﬁ©ûê
+uöt32_t
+ *
+
+	)
+
+11 
+	#GPIOA
+ (0x48000000)
+
+	)
+
+12 
+	#GPIOB
+ (0x48000400)
+
+	)
+
+13 
+	#GPIOC
+ (0x48000800)
+
+	)
+
+14 
+	#GPIOD
+ (0x48000C00)
+
+	)
+
+15 
+	#GPIOE
+ (0x48001000)
+
+	)
+
+16 
+	#GPIOH
+ (0x48001C00)
+
+	)
+
+19 
+	#GPIO_MODE_MASK
+(
+pö
+, 
+mode
+) \
+
+20 (((
+mode
+)&0x3Ë<< (2*((
+pö
+)&0xF)))
+
+	)
+
+22 
+	#GPIO_AF_MASK
+(
+pö
+, 
+af
+) \
+
+23 (((
+af
+)&0xFË<< (4*((
+pö
+)&0x7)))
+
+	)
+
+27 
+	#GPIO_MODE_IN
+ (0x0)
+
+	)
+
+28 
+	#GPIO_MODE_OUT
+ (0x1)
+
+	)
+
+29 
+	#GPIO_MODE_AF
+ (0x2)
+
+	)
+
+30 
+	#GPIO_MODE_ANALOG
+ (0x3)
+
+	)
+
+32 
+	#GPIO_MODE_RESET
+ (0x3)
+
+	)
+
+35 
+	#GPIOA_MODER
+ ((
+__REG
+)(
+GPIOA
+))
+
+	)
+
+36 
+	#GPIOA_AFRL
+ ((
+__REG
+)(
+GPIOA
++0x20))
+
+	)
+
+37 
+	#GPIOA_AF_USART2_TX_MASK
+ 
+	`GPIO_AF_MASK
+(2, 7)
+
+	)
+
+38 
+	#GPIOA_AF_USART2_RX_MASK
+ 
+	`GPIO_AF_MASK
+(3, 7)
+
+	)
+
+39 
+	#GPIOA_AF_SPI1_NSS_MASK
+ 
+	`GPIO_AF_MASK
+(4, 5)
+
+	)
+
+40 
+	#GPIOA_AF_SPI1_SCK_MASK
+ 
+	`GPIO_AF_MASK
+(5, 5)
+
+	)
+
+41 
+	#GPIOA_AF_SPI1_MISO_MASK
+ 
+	`GPIO_AF_MASK
+(6, 5)
+
+	)
+
+42 
+	#GPIOA_AF_SPI1_MOSI_MASK
+ 
+	`GPIO_AF_MASK
+(7, 5)
+
+	)
+
+45 
+	#GPIOC_MODER
+ ((
+__REG
+)(
+GPIOC
+))
+
+	)
+
+46 
+	#GPIOC_OTYPER
+ ((
+__REG
+)(
+GPIOC
++0x04))
+
+	)
+
+47 
+	#GPIOC_BSRR
+ ((
+__REG
+)(
+GPIOC
++0x18))
+
+	)
+
+48 
+	#GPIOC_BRR
+ ((
+__REG
+)(
+GPIOC
++0x28))
+
+	)
+
+51 
+	#GPIOD_AFRL
+ ((
+__REG
+)(
+GPIOD
++0x20))
+
+	)
+
+54 
+	#RCC_APB1ENR1
+ ((
+__REG
+)0x40021058)
+
+	)
+
+55 
+	#RCC_APB2ENR
+ ((
+__REG
+)0x40021060)
+
+	)
+
+56 
+	#RCC_AHB2ENR
+ ((
+__REG
+)0x4002104C)
+
+	)
+
+57 
+	#RCC_CCIPR
+ ((
+__REG
+)0x40021088)
+
+	)
+
+60 
+	#RCC_USART2EN_MASK
+ (0x00020000)
+
+	)
+
+61 
+	#RCC_GPIOAEN_MASK
+ (0x00000001)
+
+	)
+
+62 
+	#RCC_GPIOBEN_MASK
+ (0x00000002)
+
+	)
+
+63 
+	#RCC_GPIOCEN_MASK
+ (0x00000004)
+
+	)
+
+64 
+	#RCC_GPIODEN_MASK
+ (0x00000008)
+
+	)
+
+65 
+	#RCC_USART2SEL_MASK
+ (0x0000000C)
+
+	)
+
+66 
+	#RCC_SPI1EN_MASK
+ (0x00001000)
+
+	)
+
+69 
+	#SPI1
+ (0x40013000)
+
+	)
+
+70 
+	#SPI1_CR1
+ ((
+__REG
+)(
+SPI1
+))
+
+	)
+
+71 
+	#SPI1_CR2
+ ((
+__REG
+)(
+SPI1
+ + 0x04))
+
+	)
+
+72 
+	#SPI1_SR
+ ((
+__REG
+)(
+SPI1
+ + 0x08))
+
+	)
+
+73 
+	#SPI1_DR
+ ((
+__REG
+)(
+SPI1
+ + 0x0C))
+
+	)
+
+76 
+	#SPI_CR1_RXONLY_MASK
+ (0x00000400)
+
+	)
+
+77 
+	#SPI_CR1_LSBFIRST_MASK
+ (0x00000080)
+
+	)
+
+78 
+	#SPI_CR1_SPE_MASK
+ (0x00000040)
+
+	)
+
+79 
+	#SPI_CR1_BR_MASK
+ (0x00000038)
+
+	)
+
+80 
+	#SPI_CR1_BR_DIV2_MASK
+ (0x00000000)
+
+	)
+
+81 
+	#SPI_CR1_BR_DIV4_MASK
+ (0x00000008)
+
+	)
+
+82 
+	#SPI_CR1_BR_DIV8_MASK
+ (0x00000010)
+
+	)
+
+83 
+	#SPI_CR1_BR_DIV16_MASK
+ (0x00000018)
+
+	)
+
+85 
+	#SPI_SR_TXE_MASK
+ (0x00000002)
+
+	)
+
+86 
+	#SPI_SR_RXNE_MASK
+ (0x00000001)
+
+	)
+
+90 
+	#USART2
+ (0x40004400)
+
+	)
+
+91 
+	#USART2_CR1
+ ((
+__REG
+)
+USART2
+)
+
+	)
+
+92 
+	#USART2_BRR
+ ((
+__REG
+)(
+USART2
+ + 0x0C))
+
+	)
+
+93 
+	#USART2_ISR
+ ((
+__REG
+)(
+USART2
+ + 0x1C))
+
+	)
+
+94 
+	#USART2_RDR
+ ((
+__REG
+)(
+USART2
+ + 0x24))
+
+	)
+
+95 
+	#USART2_TDR
+ ((
+__REG
+)(
+USART2
+ + 0x28))
+
+	)
+
+97 
+	#USART_CR1_UE_MASK
+ 0x1
+
+	)
+
+98 
+	#USART_CR1_RE_MASK
+ 0x4
+
+	)
+
+99 
+	#USART_CR1_TE_MASK
+ 0x8
+
+	)
+
+100 
+	#USART_CR1_TXEIE_MASK
+ ((
+uöt16_t
+Ë0x2000)
+
+	)
+
+101 
+	#USART_ISR_TXE_MASK
+ ((
+uöt16_t
+Ë0x0080)
+
+	)
+
+102 
+	#USART_ISR_RXNE_MASK
+ ((
+uöt16_t
+Ë0x0020)
+
+	)
+
+	@usart.c
+
+1 
+	~"ªgs.h
+"
+
+2 
+	~"ußπ.h
+"
+
+8 
+	$ußπ_putc
+(c⁄° 
+c
+) {
+
+9 !(*(
+USART2_ISR
+Ë& 
+USART_ISR_TXE_MASK
+));
+
+10 *(
+USART2_TDR
+Ë(
+c
+ & 0xFF);
+
+11 
+	}
+}
+
+13 
+	$ußπ_gëc
+() {
+
+14 
+c
+ = 0;
+
+15 !(*(
+USART2_ISR
+Ë& 
+USART_ISR_RXNE_MASK
+));
+
+16 
+c
+ = *(
+USART2_RDR
+) & 0xFF;
+
+17  
+c
+;
+
+18 
+	}
+}
+
+24 
+	$ußπ_puts
+(c⁄° *
+°r
+) {
+
+25 
+ªt
+ = 0;
+
+26 *
+°r
+) {
+
+27 
+	`ußπ_putc
+(*
+°r
+);
+
+28 
+°r
+++;
+
+29 
+ªt
+++;
+
+31  
+ªt
+;
+
+32 
+	}
+}
+
+34 
+	$ußπ_gës
+(*
+buf
+) {
+
+35 
+ªt
+ = 0;
+
+36 
+c
+;
+
+37 
+c
+ = 
+	`ußπ_gëc
+()) {
+
+38 i‡(
+c
+ == '\n' || c == '\r' || c == ' ' || c == '\t') {
+
+41 
+buf
+[
+ªt
+++] = 
+c
+;
+
+43  
+ªt
+;
+
+44 
+	}
+}
+
+46 
+	$ußπ_¥öén
+(c⁄° *
+°r
+) {
+
+47 
+	`ußπ_puts
+(
+°r
+);
+
+48 
+	`ußπ_putc
+('\r');
+
+49 
+	`ußπ_putc
+('\n');
+
+50 
+	}
+}
+
+52 
+	$ußπ_öô
+() {
+
+55 *(
+RCC_APB1ENR1
+Ë|
+RCC_USART2EN_MASK
+;
+
+56 *(
+RCC_AHB2ENR
+Ë|
+RCC_GPIOAEN_MASK
+;
+
+59 *(
+GPIOA_AFRL
+Ë|
+GPIOA_AF_USART2_TX_MASK
+;
+
+60 *(
+GPIOA_MODER
+Ë&~
+	`GPIO_MODE_MASK
+(2, 
+GPIO_MODE_RESET
+);
+
+61 *(
+GPIOA_MODER
+Ë|
+	`GPIO_MODE_MASK
+(2, 
+GPIO_MODE_AF
+);
+
+63 *(
+GPIOA_AFRL
+Ë|
+GPIOA_AF_USART2_RX_MASK
+;
+
+64 *(
+GPIOA_MODER
+Ë&~
+	`GPIO_MODE_MASK
+(3, 
+GPIO_MODE_RESET
+);
+
+65 *(
+GPIOA_MODER
+Ë|
+	`GPIO_MODE_MASK
+(3, 
+GPIO_MODE_AF
+);
+
+68 *(
+USART2_CR1
+Ë&~
+USART_CR1_UE_MASK
+;
+
+72 
+uöt16_t
+ 
+ußπdiv
+ = ()
+USART_FREQ
+ / 
+USART_BAUD
+;
+
+75 *(
+USART2_BRR
+Ë
+ußπdiv
+;
+
+78 *(
+USART2_CR1
+Ë|
+USART_CR1_RE_MASK
+;
+
+79 *(
+USART2_CR1
+Ë|
+USART_CR1_TE_MASK
+;
+
+85 *(
+USART2_CR1
+Ë|
+USART_CR1_UE_MASK
+;
+
+87 
+	}
+}
+
+	@usart.h
+
+1 #i‚de‡
+_USART_H
+
+
+2 
+	#_USART_H
+
+
+	)
+
+4 
+	#USART_FREQ
+ (4*1000000)
+
+	)
+
+5 
+	#USART_BAUD
+ (9600)
+
+	)
+
+7 
+ußπ_öô
+();
+
+8 
+ußπ_putc
+(c⁄° 
+c
+);
+
+9 
+ußπ_gëc
+();
+
+10 
+ußπ_puts
+(c⁄° *
+°r
+);
+
+11 
+ußπ_gës
+(*
+buf
+);
+
+12 
+ußπ_¥öén
+(c⁄° *
+°r
+);
+
+	@utils.c
+
+1 
+	~"utûs.h
+"
+
+3 
+	#WTOA_BUFSIZE
+ 32
+
+	)
+
+4 
+	gwtﬂ_buf
+[
+WTOA_BUFSIZE
+];
+
+5 
+	gwtﬂ_°k
+[
+WTOA_BUFSIZE
+];
+
+6 
+uöt16_t
+ 
+	gwtﬂ_°k_t›
+ = 0;
+
+8 
+	#WTOA_HEX
+ 16
+
+	)
+
+9 
+	#WTOA_DEC
+ 10
+
+	)
+
+11 
+	$wtﬂ
+(
+uöt32_t
+ 
+w‹d
+, uöt32_à
+ødix
+) {
+
+12 
+	`mem£t
+(
+wtﬂ_buf
+, 0, 
+WTOA_BUFSIZE
+);
+
+13 
+w‹d
+) {
+
+16 
+	}
+}
+
+19 * 
+	$mem£t
+(*
+b
+, 
+c
+, 
+uöt32_t
+ 
+Àn
+) {
+
+20 
+i
+ = 0; i < 
+Àn
+; i++) {
+
+21 ((*)
+b
+)[
+i
+] = 
+c
+;
+
+23  
+b
+;
+
+24 
+	}
+}
+
+	@utils.h
+
+1 #i‚de‡
+_UTILS_H
+
+
+2 
+	#_UTILS_H
+
+
+	)
+
+4 
+	~<°döt.h
+>
+
+6 * 
+mem£t
+(*
+b
+, 
+c
+, 
+uöt32_t
+ 
+Àn
+);
+
+	@/usr/include/stdint.h
+
+6 #i‚de‡
+_STDINT_H_
+
+
+7 
+	#_STDINT_H_
+
+
+	)
+
+9 #i‡
+__LP64__
+
+
+10 
+	#__WORDSIZE
+ 64
+
+	)
+
+12 
+	#__WORDSIZE
+ 32
+
+	)
+
+18 
+	~<sys/_ty≥s/_öt8_t.h
+>
+
+19 
+	~<sys/_ty≥s/_öt16_t.h
+>
+
+20 
+	~<sys/_ty≥s/_öt32_t.h
+>
+
+21 
+	~<sys/_ty≥s/_öt64_t.h
+>
+
+23 
+	~<_ty≥s/_uöt8_t.h
+>
+
+24 
+	~<_ty≥s/_uöt16_t.h
+>
+
+25 
+	~<_ty≥s/_uöt32_t.h
+>
+
+26 
+	~<_ty≥s/_uöt64_t.h
+>
+
+29 
+öt8_t
+ 
+	töt_Àa°8_t
+;
+
+30 
+öt16_t
+ 
+	töt_Àa°16_t
+;
+
+31 
+öt32_t
+ 
+	töt_Àa°32_t
+;
+
+32 
+öt64_t
+ 
+	töt_Àa°64_t
+;
+
+33 
+uöt8_t
+ 
+	tuöt_Àa°8_t
+;
+
+34 
+uöt16_t
+ 
+	tuöt_Àa°16_t
+;
+
+35 
+uöt32_t
+ 
+	tuöt_Àa°32_t
+;
+
+36 
+uöt64_t
+ 
+	tuöt_Àa°64_t
+;
+
+40 
+öt8_t
+ 
+	töt_Á°8_t
+;
+
+41 
+öt16_t
+ 
+	töt_Á°16_t
+;
+
+42 
+öt32_t
+ 
+	töt_Á°32_t
+;
+
+43 
+öt64_t
+ 
+	töt_Á°64_t
+;
+
+44 
+uöt8_t
+ 
+	tuöt_Á°8_t
+;
+
+45 
+uöt16_t
+ 
+	tuöt_Á°16_t
+;
+
+46 
+uöt32_t
+ 
+	tuöt_Á°32_t
+;
+
+47 
+uöt64_t
+ 
+	tuöt_Á°64_t
+;
+
+52 
+	~<sys/_ty≥s.h
+>
+
+53 
+	~<sys/_ty≥s/_öçå_t.h
+>
+
+54 
+	~<sys/_ty≥s/_uöçå_t.h
+>
+
+58 
+	~<_ty≥s/_ötmax_t.h
+>
+
+59 
+	~<_ty≥s/_uötmax_t.h
+>
+
+68 
+	#INT8_MAX
+ 127
+
+	)
+
+69 
+	#INT16_MAX
+ 32767
+
+	)
+
+70 
+	#INT32_MAX
+ 2147483647
+
+	)
+
+71 
+	#INT64_MAX
+ 9223372036854775807LL
+
+	)
+
+73 
+	#INT8_MIN
+ -128
+
+	)
+
+74 
+	#INT16_MIN
+ -32768
+
+	)
+
+81 
+	#INT32_MIN
+ (-
+INT32_MAX
+-1)
+
+	)
+
+82 
+	#INT64_MIN
+ (-
+INT64_MAX
+-1)
+
+	)
+
+84 
+	#UINT8_MAX
+ 255
+
+	)
+
+85 
+	#UINT16_MAX
+ 65535
+
+	)
+
+86 
+	#UINT32_MAX
+ 4294967295U
+
+	)
+
+87 
+	#UINT64_MAX
+ 18446744073709551615ULL
+
+	)
+
+90 
+	#INT_LEAST8_MIN
+ 
+INT8_MIN
+
+
+	)
+
+91 
+	#INT_LEAST16_MIN
+ 
+INT16_MIN
+
+
+	)
+
+92 
+	#INT_LEAST32_MIN
+ 
+INT32_MIN
+
+
+	)
+
+93 
+	#INT_LEAST64_MIN
+ 
+INT64_MIN
+
+
+	)
+
+95 
+	#INT_LEAST8_MAX
+ 
+INT8_MAX
+
+
+	)
+
+96 
+	#INT_LEAST16_MAX
+ 
+INT16_MAX
+
+
+	)
+
+97 
+	#INT_LEAST32_MAX
+ 
+INT32_MAX
+
+
+	)
+
+98 
+	#INT_LEAST64_MAX
+ 
+INT64_MAX
+
+
+	)
+
+100 
+	#UINT_LEAST8_MAX
+ 
+UINT8_MAX
+
+
+	)
+
+101 
+	#UINT_LEAST16_MAX
+ 
+UINT16_MAX
+
+
+	)
+
+102 
+	#UINT_LEAST32_MAX
+ 
+UINT32_MAX
+
+
+	)
+
+103 
+	#UINT_LEAST64_MAX
+ 
+UINT64_MAX
+
+
+	)
+
+106 
+	#INT_FAST8_MIN
+ 
+INT8_MIN
+
+
+	)
+
+107 
+	#INT_FAST16_MIN
+ 
+INT16_MIN
+
+
+	)
+
+108 
+	#INT_FAST32_MIN
+ 
+INT32_MIN
+
+
+	)
+
+109 
+	#INT_FAST64_MIN
+ 
+INT64_MIN
+
+
+	)
+
+111 
+	#INT_FAST8_MAX
+ 
+INT8_MAX
+
+
+	)
+
+112 
+	#INT_FAST16_MAX
+ 
+INT16_MAX
+
+
+	)
+
+113 
+	#INT_FAST32_MAX
+ 
+INT32_MAX
+
+
+	)
+
+114 
+	#INT_FAST64_MAX
+ 
+INT64_MAX
+
+
+	)
+
+116 
+	#UINT_FAST8_MAX
+ 
+UINT8_MAX
+
+
+	)
+
+117 
+	#UINT_FAST16_MAX
+ 
+UINT16_MAX
+
+
+	)
+
+118 
+	#UINT_FAST32_MAX
+ 
+UINT32_MAX
+
+
+	)
+
+119 
+	#UINT_FAST64_MAX
+ 
+UINT64_MAX
+
+
+	)
+
+123 #i‡
+__WORDSIZE
+ == 64
+
+124 
+	#INTPTR_MIN
+ 
+INT64_MIN
+
+
+	)
+
+125 
+	#INTPTR_MAX
+ 
+INT64_MAX
+
+
+	)
+
+127 
+	#INTPTR_MIN
+ 
+INT32_MIN
+
+
+	)
+
+128 
+	#INTPTR_MAX
+ 
+INT32_MAX
+
+
+	)
+
+131 #i‡
+__WORDSIZE
+ == 64
+
+132 
+	#UINTPTR_MAX
+ 
+UINT64_MAX
+
+
+	)
+
+134 
+	#UINTPTR_MAX
+ 
+UINT32_MAX
+
+
+	)
+
+138 
+	#INTMAX_MIN
+ 
+INT64_MIN
+
+
+	)
+
+139 
+	#INTMAX_MAX
+ 
+INT64_MAX
+
+
+	)
+
+141 
+	#UINTMAX_MAX
+ 
+UINT64_MAX
+
+
+	)
+
+144 #i‡
+__WORDSIZE
+ == 64
+
+145 
+	#PTRDIFF_MIN
+ 
+INT64_MIN
+
+
+	)
+
+146 
+	#PTRDIFF_MAX
+ 
+INT64_MAX
+
+
+	)
+
+148 
+	#PTRDIFF_MIN
+ 
+INT32_MIN
+
+
+	)
+
+149 
+	#PTRDIFF_MAX
+ 
+INT32_MAX
+
+
+	)
+
+152 #i‡
+__WORDSIZE
+ == 64
+
+153 
+	#SIZE_MAX
+ 
+UINT64_MAX
+
+
+	)
+
+155 
+	#SIZE_MAX
+ 
+UINT32_MAX
+
+
+	)
+
+158 #i‡
+deföed
+(
+__STDC_WANT_LIB_EXT1__
+) && __STDC_WANT_LIB_EXT1__ >= 1
+
+159 
+	#RSIZE_MAX
+ (
+SIZE_MAX
+ >> 1)
+
+	)
+
+162 #i‚de‡
+WCHAR_MAX
+
+
+163 #ifde‡
+__WCHAR_MAX__
+
+
+164 
+	#WCHAR_MAX
+ 
+__WCHAR_MAX__
+
+
+	)
+
+166 
+	#WCHAR_MAX
+ 0x7fffffff
+
+	)
+
+174 #i‚de‡
+WCHAR_MIN
+
+
+175 #i‡
+WCHAR_MAX
+ == 0xffff
+
+176 
+	#WCHAR_MIN
+ 0
+
+	)
+
+178 
+	#WCHAR_MIN
+ (-
+WCHAR_MAX
+-1)
+
+	)
+
+182 
+	#WINT_MIN
+ 
+INT32_MIN
+
+
+	)
+
+183 
+	#WINT_MAX
+ 
+INT32_MAX
+
+
+	)
+
+185 
+	#SIG_ATOMIC_MIN
+ 
+INT32_MIN
+
+
+	)
+
+186 
+	#SIG_ATOMIC_MAX
+ 
+INT32_MAX
+
+
+	)
+
+189 
+	#INT8_C
+(
+v
+Ë(v)
+
+	)
+
+190 
+	#INT16_C
+(
+v
+Ë(v)
+
+	)
+
+191 
+	#INT32_C
+(
+v
+Ë(v)
+
+	)
+
+192 
+	#INT64_C
+(
+v
+Ë(v ## 
+LL
+)
+
+	)
+
+194 
+	#UINT8_C
+(
+v
+Ë(v ## 
+U
+)
+
+	)
+
+195 
+	#UINT16_C
+(
+v
+Ë(v ## 
+U
+)
+
+	)
+
+196 
+	#UINT32_C
+(
+v
+Ë(v ## 
+U
+)
+
+	)
+
+197 
+	#UINT64_C
+(
+v
+Ë(v ## 
+ULL
+)
+
+	)
+
+199 #ifde‡
+__LP64__
+
+
+200 
+	#INTMAX_C
+(
+v
+Ë(v ## 
+L
+)
+
+	)
+
+201 
+	#UINTMAX_C
+(
+v
+Ë(v ## 
+UL
+)
+
+	)
+
+203 
+	#INTMAX_C
+(
+v
+Ë(v ## 
+LL
+)
+
+	)
+
+204 
+	#UINTMAX_C
+(
+v
+Ë(v ## 
+ULL
+)
+
+	)
+
+	@/usr/include/_types/_intmax_t.h
+
+29 #i‚de‡
+_INTMAX_T
+
+
+30 
+	#_INTMAX_T
+
+
+	)
+
+31 #ifde‡
+__INTMAX_TYPE__
+
+
+32 
+__INTMAX_TYPE__
+ 
+	tötmax_t
+;
+
+34 #ifde‡
+__LP64__
+
+
+35 
+	tötmax_t
+;
+
+37 
+	tötmax_t
+;
+
+	@/usr/include/_types/_uint16_t.h
+
+29 #i‚de‡
+_UINT16_T
+
+
+30 
+	#_UINT16_T
+
+
+	)
+
+31 
+	tuöt16_t
+;
+
+	@/usr/include/_types/_uint32_t.h
+
+29 #i‚de‡
+_UINT32_T
+
+
+30 
+	#_UINT32_T
+
+
+	)
+
+31 
+	tuöt32_t
+;
+
+	@/usr/include/_types/_uint64_t.h
+
+29 #i‚de‡
+_UINT64_T
+
+
+30 
+	#_UINT64_T
+
+
+	)
+
+31 
+	tuöt64_t
+;
+
+	@/usr/include/_types/_uint8_t.h
+
+29 #i‚de‡
+_UINT8_T
+
+
+30 
+	#_UINT8_T
+
+
+	)
+
+31 
+	tuöt8_t
+;
+
+	@/usr/include/_types/_uintmax_t.h
+
+29 #i‚de‡
+_UINTMAX_T
+
+
+30 
+	#_UINTMAX_T
+
+
+	)
+
+31 #ifde‡
+__UINTMAX_TYPE__
+
+
+32 
+__UINTMAX_TYPE__
+ 
+	tuötmax_t
+;
+
+34 #ifde‡
+__LP64__
+
+
+35 
+	tuötmax_t
+;
+
+37 
+	tuötmax_t
+;
+
+	@/usr/include/sys/_types.h
+
+29 #i‚de‡
+_SYS__TYPES_H_
+
+
+30 
+	#_SYS__TYPES_H_
+
+
+	)
+
+32 
+	~<sys/cdefs.h
+>
+
+33 
+	~<machöe/_ty≥s.h
+>
+
+41 #ifde‡
+__˝lu•lus
+
+
+42 #ifde‡
+__GNUG__
+
+
+43 
+	#__DARWIN_NULL
+ 
+__nuŒ
+
+
+	)
+
+45 #ifde‡
+__LP64__
+
+
+46 
+	#__DARWIN_NULL
+ (0L)
+
+	)
+
+48 
+	#__DARWIN_NULL
+ 0
+
+	)
+
+52 
+	#__DARWIN_NULL
+ ((*)0)
+
+	)
+
+55 
+__öt64_t
+ 
+	t__d¨wö_blk˙t_t
+;
+
+56 
+__öt32_t
+ 
+	t__d¨wö_blksize_t
+;
+
+57 
+__öt32_t
+ 
+	t__d¨wö_dev_t
+;
+
+58 
+	t__d¨wö_fsblk˙t_t
+;
+
+59 
+	t__d¨wö_fsfû˙t_t
+;
+
+60 
+__uöt32_t
+ 
+	t__d¨wö_gid_t
+;
+
+61 
+__uöt32_t
+ 
+	t__d¨wö_id_t
+;
+
+62 
+__uöt64_t
+ 
+	t__d¨wö_öo64_t
+;
+
+63 #i‡
+__DARWIN_64_BIT_INO_T
+
+
+64 
+__d¨wö_öo64_t
+ 
+	t__d¨wö_öo_t
+;
+
+66 
+__uöt32_t
+ 
+	t__d¨wö_öo_t
+;
+
+68 
+__d¨wö_«tuøl_t
+ 
+	t__d¨wö_mach_p‹t_«me_t
+;
+
+69 
+__d¨wö_mach_p‹t_«me_t
+ 
+	t__d¨wö_mach_p‹t_t
+;
+
+70 
+__uöt16_t
+ 
+	t__d¨wö_mode_t
+;
+
+71 
+__öt64_t
+ 
+	t__d¨wö_off_t
+;
+
+72 
+__öt32_t
+ 
+	t__d¨wö_pid_t
+;
+
+73 
+__uöt32_t
+ 
+	t__d¨wö_sig£t_t
+;
+
+74 
+__öt32_t
+ 
+	t__d¨wö_su£c⁄ds_t
+;
+
+75 
+__uöt32_t
+ 
+	t__d¨wö_uid_t
+;
+
+76 
+__uöt32_t
+ 
+	t__d¨wö_u£c⁄ds_t
+;
+
+77 
+	t__d¨wö_uuid_t
+[16];
+
+78 
+	t__d¨wö_uuid_°rög_t
+[37];
+
+80 
+	~<sys/_±hªad/_±hªad_ty≥s.h
+>
+
+82 #i‡
+deföed
+(
+__GNUC__
+Ë&& (__GNUC__ =3 && 
+__GNUC_MINOR__
+ >= 5 || __GNUC__ > 3)
+
+83 
+	#__off£tof
+(
+ty≥
+, 
+fõld
+Ë
+	`__buûtö_off£tof
+—y≥, fõld)
+
+	)
+
+85 
+	#__off£tof
+(
+ty≥
+, 
+fõld
+Ë((
+size_t
+)(&(—y≥ *)0)->fõld))
+
+	)
+
+	@/usr/include/sys/_types/_int16_t.h
+
+28 #i‚de‡
+_INT16_T
+
+
+29 
+	#_INT16_T
+
+
+	)
+
+30 
+	töt16_t
+;
+
+	@/usr/include/sys/_types/_int32_t.h
+
+28 #i‚de‡
+_INT32_T
+
+
+29 
+	#_INT32_T
+
+
+	)
+
+30 
+	töt32_t
+;
+
+	@/usr/include/sys/_types/_int64_t.h
+
+28 #i‚de‡
+_INT64_T
+
+
+29 
+	#_INT64_T
+
+
+	)
+
+30 
+	töt64_t
+;
+
+	@/usr/include/sys/_types/_int8_t.h
+
+28 #i‚de‡
+_INT8_T
+
+
+29 
+	#_INT8_T
+
+
+	)
+
+30 
+__sig√d
+ 
+	töt8_t
+;
+
+	@/usr/include/sys/_types/_intptr_t.h
+
+28 #i‚de‡
+_INTPTR_T
+
+
+29 
+	#_INTPTR_T
+
+
+	)
+
+30 
+__d¨wö_öçå_t
+ 
+	töçå_t
+;
+
+	@/usr/include/sys/_types/_uintptr_t.h
+
+28 #i‚de‡
+_UINTPTR_T
+
+
+29 
+	#_UINTPTR_T
+
+
+	)
+
+30 
+	tuöçå_t
+;
+
+	@/usr/include/machine/_types.h
+
+28 #i‚de‡
+_BSD_MACHINE__TYPES_H_
+
+
+29 
+	#_BSD_MACHINE__TYPES_H_
+
+
+	)
+
+31 #i‡
+deföed
+ (
+__i386__
+Ë|| deföed(
+__x86_64__
+)
+
+32 
+	~"i386/_ty≥s.h
+"
+
+34 #îr‹ 
+¨chôe˘uª
+ 
+nŸ
+ 
+suµ‹ãd
+
+
+	@/usr/include/sys/_pthread/_pthread_types.h
+
+29 #i‚de‡
+_SYS__PTHREAD_TYPES_H_
+
+
+30 
+	#_SYS__PTHREAD_TYPES_H_
+
+
+	)
+
+32 
+	~<sys/cdefs.h
+>
+
+35 #i‡
+deföed
+(
+__LP64__
+)
+
+36 
+	#__PTHREAD_SIZE__
+ 8176
+
+	)
+
+37 
+	#__PTHREAD_ATTR_SIZE__
+ 56
+
+	)
+
+38 
+	#__PTHREAD_MUTEXATTR_SIZE__
+ 8
+
+	)
+
+39 
+	#__PTHREAD_MUTEX_SIZE__
+ 56
+
+	)
+
+40 
+	#__PTHREAD_CONDATTR_SIZE__
+ 8
+
+	)
+
+41 
+	#__PTHREAD_COND_SIZE__
+ 40
+
+	)
+
+42 
+	#__PTHREAD_ONCE_SIZE__
+ 8
+
+	)
+
+43 
+	#__PTHREAD_RWLOCK_SIZE__
+ 192
+
+	)
+
+44 
+	#__PTHREAD_RWLOCKATTR_SIZE__
+ 16
+
+	)
+
+46 
+	#__PTHREAD_SIZE__
+ 4088
+
+	)
+
+47 
+	#__PTHREAD_ATTR_SIZE__
+ 36
+
+	)
+
+48 
+	#__PTHREAD_MUTEXATTR_SIZE__
+ 8
+
+	)
+
+49 
+	#__PTHREAD_MUTEX_SIZE__
+ 40
+
+	)
+
+50 
+	#__PTHREAD_CONDATTR_SIZE__
+ 4
+
+	)
+
+51 
+	#__PTHREAD_COND_SIZE__
+ 24
+
+	)
+
+52 
+	#__PTHREAD_ONCE_SIZE__
+ 4
+
+	)
+
+53 
+	#__PTHREAD_RWLOCK_SIZE__
+ 124
+
+	)
+
+54 
+	#__PTHREAD_RWLOCKATTR_SIZE__
+ 12
+
+	)
+
+57 
+	s__d¨wö_±hªad_h™dÀr_ªc
+ {
+
+58 (*
+	m__routöe
+)(*);
+
+59 *
+	m__¨g
+;
+
+60 
+__d¨wö_±hªad_h™dÀr_ªc
+ *
+	m__√xt
+;
+
+63 
+	s_›aque_±hªad_©å_t
+ {
+
+64 
+	m__sig
+;
+
+65 
+	m__›aque
+[
+__PTHREAD_ATTR_SIZE__
+];
+
+68 
+	s_›aque_±hªad_c⁄d_t
+ {
+
+69 
+	m__sig
+;
+
+70 
+	m__›aque
+[
+__PTHREAD_COND_SIZE__
+];
+
+73 
+	s_›aque_±hªad_c⁄d©å_t
+ {
+
+74 
+	m__sig
+;
+
+75 
+	m__›aque
+[
+__PTHREAD_CONDATTR_SIZE__
+];
+
+78 
+	s_›aque_±hªad_muãx_t
+ {
+
+79 
+	m__sig
+;
+
+80 
+	m__›aque
+[
+__PTHREAD_MUTEX_SIZE__
+];
+
+83 
+	s_›aque_±hªad_muãx©å_t
+ {
+
+84 
+	m__sig
+;
+
+85 
+	m__›aque
+[
+__PTHREAD_MUTEXATTR_SIZE__
+];
+
+88 
+	s_›aque_±hªad_⁄˚_t
+ {
+
+89 
+	m__sig
+;
+
+90 
+	m__›aque
+[
+__PTHREAD_ONCE_SIZE__
+];
+
+93 
+	s_›aque_±hªad_rwlock_t
+ {
+
+94 
+	m__sig
+;
+
+95 
+	m__›aque
+[
+__PTHREAD_RWLOCK_SIZE__
+];
+
+98 
+	s_›aque_±hªad_rwlock©å_t
+ {
+
+99 
+	m__sig
+;
+
+100 
+	m__›aque
+[
+__PTHREAD_RWLOCKATTR_SIZE__
+];
+
+103 
+	s_›aque_±hªad_t
+ {
+
+104 
+	m__sig
+;
+
+105 
+__d¨wö_±hªad_h™dÀr_ªc
+ *
+	m__˛ónup_°ack
+;
+
+106 
+	m__›aque
+[
+__PTHREAD_SIZE__
+];
+
+109 
+_›aque_±hªad_©å_t
+ 
+	t__d¨wö_±hªad_©å_t
+;
+
+110 
+_›aque_±hªad_c⁄d_t
+ 
+	t__d¨wö_±hªad_c⁄d_t
+;
+
+111 
+_›aque_±hªad_c⁄d©å_t
+ 
+	t__d¨wö_±hªad_c⁄d©å_t
+;
+
+112 
+	t__d¨wö_±hªad_key_t
+;
+
+113 
+_›aque_±hªad_muãx_t
+ 
+	t__d¨wö_±hªad_muãx_t
+;
+
+114 
+_›aque_±hªad_muãx©å_t
+ 
+	t__d¨wö_±hªad_muãx©å_t
+;
+
+115 
+_›aque_±hªad_⁄˚_t
+ 
+	t__d¨wö_±hªad_⁄˚_t
+;
+
+116 
+_›aque_±hªad_rwlock_t
+ 
+	t__d¨wö_±hªad_rwlock_t
+;
+
+117 
+_›aque_±hªad_rwlock©å_t
+ 
+	t__d¨wö_±hªad_rwlock©å_t
+;
+
+118 
+_›aque_±hªad_t
+ *
+	t__d¨wö_±hªad_t
+;
+
+	@/usr/include/sys/cdefs.h
+
+67 #i‚def 
+_CDEFS_H_
+
+
+68 
+	#_CDEFS_H_
+
+
+	)
+
+70 #i‡
+deföed
+(
+__˝lu•lus
+)
+
+71 
+	#__BEGIN_DECLS
+ "C" {
+
+	)
+
+72 
+	#__END_DECLS
+ }
+
+	)
+
+74 
+	#__BEGIN_DECLS
+
+
+	)
+
+75 
+	#__END_DECLS
+
+
+	)
+
+80 #i‡!
+deföed
+(
+__GNUC__
+) || __GNUC__ < 4
+
+88 #i‚de‡
+__has_buûtö
+
+
+89 
+	#__has_buûtö
+(
+x
+Ë0
+
+	)
+
+91 #i‚de‡
+__has_ö˛ude
+
+
+92 
+	#__has_ö˛ude
+(
+x
+Ë0
+
+	)
+
+94 #i‚de‡
+__has_„©uª
+
+
+95 
+	#__has_„©uª
+(
+x
+Ë0
+
+	)
+
+97 #i‚de‡
+__has_©åibuã
+
+
+98 
+	#__has_©åibuã
+(
+x
+Ë0
+
+	)
+
+100 #i‚de‡
+__has_exãnsi⁄
+
+
+101 
+	#__has_exãnsi⁄
+(
+x
+Ë0
+
+	)
+
+111 #i‡
+deföed
+(
+__STDC__
+Ë|| deföed(
+__˝lu•lus
+)
+
+112 
+	#__P
+(
+¥Ÿos
+Ë¥Ÿo†
+
+	)
+
+113 
+	#__CONCAT
+(
+x
+,
+y
+Ëx ## 
+	)
+y
+
+114 
+	#__STRING
+(
+x
+Ë#x
+
+	)
+
+116 
+	#__c⁄°
+ c⁄°
+
+	)
+
+117 
+	#__sig√d
+ sig√d
+
+	)
+
+118 
+	#__vﬁ©ûe
+ vﬁ©ûe
+
+	)
+
+119 #i‡
+deföed
+(
+__˝lu•lus
+)
+
+120 
+	#__ölöe
+ 
+ölöe
+
+
+	)
+
+122 #i‚de‡
+__GNUC__
+
+
+123 
+	#__ölöe
+
+
+	)
+
+128 
+	#__P
+(
+¥Ÿos
+Ë(Ë
+
+	)
+
+129 
+	#__CONCAT
+(
+x
+,
+y
+Ëx 
+	)
+y
+
+130 
+	#__STRING
+(
+x
+Ë"x"
+
+	)
+
+132 #i‚de‡
+__GNUC__
+
+
+133 
+	#__c⁄°
+
+
+	)
+
+134 
+	#__ölöe
+
+
+	)
+
+135 
+	#__sig√d
+
+
+	)
+
+136 
+	#__vﬁ©ûe
+
+
+	)
+
+147 #i‚def 
+NO_ANSI_KEYWORDS
+
+
+148 c⁄° 
+__c⁄°
+
+
+	)
+
+149 
+	#ölöe
+ 
+__ölöe
+
+
+	)
+
+150 sig√d 
+__sig√d
+
+
+	)
+
+151 vﬁ©ûê
+__vﬁ©ûe
+
+
+	)
+
+155 
+	#__dód2
+ 
+	`__©åibuã__
+((
+n‹ëu∫
+))
+
+	)
+
+156 
+	#__puª2
+ 
+	`__©åibuã__
+((c⁄°))
+
+	)
+
+161 
+	#__unu£d
+ 
+	`__©åibuã__
+((
+unu£d
+))
+
+	)
+
+166 
+	#__u£d
+ 
+	`__©åibuã__
+((
+u£d
+))
+
+	)
+
+176 
+	#__dïªˇãd
+ 
+	`__©åibuã__
+((
+dïªˇãd
+))
+
+	)
+
+178 #i‡
+__has_exãnsi⁄
+(
+©åibuã_dïªˇãd_wôh_mesßge
+) || \
+
+179 (
+deföed
+(
+__GNUC__
+Ë&& ((__GNUC__ >5Ë|| ((__GNUC__ =4Ë&& (
+__GNUC_MINOR__
+ >= 5))))
+
+180 
+	#__dïªˇãd_msg
+(
+_msg
+Ë
+	`__©åibuã__
+((
+	`dïªˇãd
+(_msg)))
+
+	)
+
+182 
+	#__dïªˇãd_msg
+(
+_msg
+Ë
+	`__©åibuã__
+((
+dïªˇãd
+))
+
+	)
+
+185 #i‡
+__has_exãnsi⁄
+(
+íumî©‹_©åibuãs
+)
+
+186 
+	#__dïªˇãd_íum_msg
+(
+_msg
+Ë
+	`__dïªˇãd_msg
+(_msg)
+
+	)
+
+188 
+	#__dïªˇãd_íum_msg
+(
+_msg
+)
+
+	)
+
+194 
+	#__u«vaûabÀ
+ 
+	`__©åibuã__
+((
+u«vaûabÀ
+))
+
+	)
+
+197 #i‚de‡
+__dód
+
+
+198 
+	#__dód
+
+
+	)
+
+199 
+	#__puª
+
+
+	)
+
+206 #i‡
+__STDC_VERSION__
+ < 199901
+
+207 
+	#__ª°ri˘
+
+
+	)
+
+209 
+	#__ª°ri˘
+ 
+ª°ri˘
+
+
+	)
+
+216 #i‡!
+__has_„©uª
+(
+nuŒabûôy
+)
+
+217 #i‚de‡
+__nuŒabÀ
+
+
+218 
+	#__nuŒabÀ
+
+
+	)
+
+220 #i‚de‡
+__n⁄nuŒ
+
+
+221 
+	#__n⁄nuŒ
+
+
+	)
+
+223 #i‚de‡
+__nuŒ_un•ecifõd
+
+
+224 
+	#__nuŒ_un•ecifõd
+
+
+	)
+
+226 #i‚de‡
+_NuŒabÀ
+
+
+227 
+	#_NuŒabÀ
+
+
+	)
+
+229 #i‚de‡
+_N⁄nuŒ
+
+
+230 
+	#_N⁄nuŒ
+
+
+	)
+
+232 #i‚de‡
+_NuŒ_un•ecifõd
+
+
+233 
+	#_NuŒ_un•ecifõd
+
+
+	)
+
+241 #i‡
+__has_©åibuã
+(
+dißbÀ_èû_ˇŒs
+)
+
+242 
+	#__dißbÀ_èû_ˇŒs
+ 
+	`__©åibuã__
+((
+__dißbÀ_èû_ˇŒs__
+))
+
+	)
+
+244 
+	#__dißbÀ_èû_ˇŒs
+
+
+	)
+
+253 #i‡
+__has_©åibuã
+(
+nŸ_èû_ˇŒed
+)
+
+254 
+	#__nŸ_èû_ˇŒed
+ 
+	`__©åibuã__
+((
+__nŸ_èû_ˇŒed__
+))
+
+	)
+
+256 
+	#__nŸ_èû_ˇŒed
+
+
+	)
+
+264 #i‡
+__has_©åibuã
+(
+w¨n_unu£d_ªsu…
+)
+
+265 
+	#__ªsu…_u£_check
+ 
+	`__©åibuã__
+((
+__w¨n_unu£d_ªsu…__
+))
+
+	)
+
+267 
+	#__ªsu…_u£_check
+
+
+	)
+
+274 #i‡
+__has_„©uª
+(
+©åibuã_avaûabûôy_swi·
+)
+
+275 
+	#__swi·_u«vaûabÀ
+(
+_msg
+Ë
+	`__©åibuã__
+((
+	`__avaûabûôy__
+(
+swi·
+, 
+u«vaûabÀ
+, 
+mesßge
+=_msg)))
+
+	)
+
+277 
+	#__swi·_u«vaûabÀ
+(
+_msg
+)
+
+	)
+
+296 #i‡
+deföed
+(
+__˝lu•lus
+) || \
+
+297 (
+__STDC_VERSION__
+ >= 199901L && \
+
+298 !
+deföed
+(
+__GNUC_GNU_INLINE__
+) && \
+
+299 (!
+deföed
+(
+__GNUC__
+Ë|| 
+	$deföed
+(
+__˛™g__
+)))
+
+300 
+	#__hódî_ölöe
+ 
+ölöe
+
+
+	)
+
+301 #ñi‡
+	`deföed
+(
+__GNUC__
+Ë&& deföed(
+__GNUC_STDC_INLINE__
+)
+
+302 
+	#__hódî_ölöe
+ 
+__ölöe
+ 
+	`__©åibuã__
+((
+__gnu_ölöe__
+))
+
+	)
+
+303 #ñi‡
+	`deföed
+(
+__GNUC__
+)
+
+304 
+	#__hódî_ölöe
+ 
+__ölöe
+
+
+	)
+
+309 
+	#__hódî_ölöe
+ 
+__ölöe
+
+
+	)
+
+312 #ifde‡
+__GNUC__
+
+
+313 
+	#__hódî_Æways_ölöe
+ 
+__hódî_ölöe
+ 
+	`__©åibuã__
+ ((
+__Æways_ölöe__
+))
+
+	)
+
+318 
+	#__hódî_Æways_ölöe
+ 
+__hódî_ölöe
+
+
+	)
+
+325 #i‡
+	`deföed
+(
+__˛™g__
+)
+
+326 
+	#__uƒóchabÀ_ok_push
+ \
+
+327 
+	`_Pøgma
+("clang diagnosticÖush") \
+
+328 
+	`_Pøgma
+("˛™g dügno°i¯ign‹ed \"-WuƒóchabÀ-code\"")
+
+	)
+
+329 
+	#__uƒóchabÀ_ok_p›
+ \
+
+330 
+	`_Pøgma
+("˛™g dügno°i¯p›")
+
+	)
+
+331 #ñi‡
+	`deföed
+(
+__GNUC__
+Ë&& ((__GNUC__ > 4Ë|| (__GNUC__ =4 && 
+__GNUC_MINOR__
+ >= 6))
+
+332 
+	#__uƒóchabÀ_ok_push
+ \
+
+333 
+	`_Pøgma
+("GCC diagnosticÖush") \
+
+334 
+	`_Pøgma
+("GCC dügno°i¯ign‹ed \"-WuƒóchabÀ-code\"")
+
+	)
+
+335 
+	#__uƒóchabÀ_ok_p›
+ \
+
+336 
+	`_Pøgma
+("GCC dügno°i¯p›")
+
+	)
+
+338 
+	#__uƒóchabÀ_ok_push
+
+
+	)
+
+339 
+	#__uƒóchabÀ_ok_p›
+
+
+	)
+
+350 
+	#__¥ötÊike
+(
+fmèrg
+, 
+fú°v¨¨g
+) \
+
+351 
+	`__©åibuã__
+((
+	`__f‹m©__
+ (
+__¥ötf__
+, 
+fmèrg
+, 
+fú°v¨¨g
+)))
+
+	)
+
+352 
+	#__¥ötf0like
+(
+fmèrg
+, 
+fú°v¨¨g
+) \
+
+353 
+	`__©åibuã__
+((
+	`__f‹m©__
+ (
+__¥ötf0__
+, 
+fmèrg
+, 
+fú°v¨¨g
+)))
+
+	)
+
+354 
+	#__sˇnÊike
+(
+fmèrg
+, 
+fú°v¨¨g
+) \
+
+355 
+	`__©åibuã__
+((
+	`__f‹m©__
+ (
+__sˇnf__
+, 
+fmèrg
+, 
+fú°v¨¨g
+)))
+
+	)
+
+357 
+	#__IDSTRING
+(
+«me
+,
+°rög
+Ëc⁄° «me[] 
+__u£d
+ = 
+	)
+string
+
+359 #i‚de‡
+__COPYRIGHT
+
+
+360 
+	#__COPYRIGHT
+(
+s
+Ë
+	`__IDSTRING
+(
+c›yright
+,s)
+
+	)
+
+363 #i‚de‡
+__RCSID
+
+
+364 
+	#__RCSID
+(
+s
+Ë
+	`__IDSTRING
+(
+rcsid
+,s)
+
+	)
+
+367 #i‚de‡
+__SCCSID
+
+
+368 
+	#__SCCSID
+(
+s
+Ë
+	`__IDSTRING
+(
+sccsid
+,s)
+
+	)
+
+371 #i‚de‡
+__PROJECT_VERSION
+
+
+372 
+	#__PROJECT_VERSION
+(
+s
+Ë
+	`__IDSTRING
+(
+¥oje˘_vîsi⁄
+,s)
+
+	)
+
+376 #i‚de‡
+__FBSDID
+
+
+377 
+	#__FBSDID
+(
+s
+)
+
+	)
+
+380 #i‚def 
+__DECONST
+
+
+381 
+	#__DECONST
+(
+ty≥
+, 
+v¨
+Ë
+	`__CAST_AWAY_QUALIFIER
+(v¨, c⁄°,Åy≥)
+
+	)
+
+384 #i‚def 
+__DEVOLATILE
+
+
+385 
+	#__DEVOLATILE
+(
+ty≥
+, 
+v¨
+Ë
+	`__CAST_AWAY_QUALIFIER
+(v¨, vﬁ©ûe,Åy≥)
+
+	)
+
+388 #i‚def 
+__DEQUALIFY
+
+
+389 
+	#__DEQUALIFY
+(
+ty≥
+, 
+v¨
+Ë
+	`__CAST_AWAY_QUALIFIER
+(v¨, c⁄° vﬁ©ûe,Åy≥)
+
+	)
+
+431 
+	#__DARWIN_ONLY_64_BIT_INO_T
+ 0
+
+	)
+
+433 
+	#__DARWIN_ONLY_VERS_1050
+ 0
+
+	)
+
+453 #i‡!
+	`deföed
+(
+__DARWIN_ONLY_UNIX_CONFORMANCE
+)
+
+454 #i‡
+	`deföed
+(
+__LP64__
+)
+
+455 
+	#__DARWIN_ONLY_UNIX_CONFORMANCE
+ 1
+
+	)
+
+457 
+	#__DARWIN_ONLY_UNIX_CONFORMANCE
+ 0
+
+	)
+
+461 #i‡!
+	`deföed
+(
+__DARWIN_UNIX03
+)
+
+462 #i‡ 
+__DARWIN_ONLY_UNIX_CONFORMANCE
+
+
+463 #i‡
+	`deföed
+(
+_NONSTD_SOURCE
+)
+
+466 
+	#__DARWIN_UNIX03
+ 1
+
+	)
+
+467 #ñi‡
+	`deföed
+(
+__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__
+) && ((__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__-0) < 1040)
+
+468 
+	#__DARWIN_UNIX03
+ 0
+
+	)
+
+469 #ñi‡
+	`deföed
+(
+_DARWIN_C_SOURCE
+Ë|| deföed(
+_XOPEN_SOURCE
+Ë|| deföed(
+_POSIX_C_SOURCE
+)
+
+470 #i‡
+	`deföed
+(
+_NONSTD_SOURCE
+)
+
+473 
+	#__DARWIN_UNIX03
+ 1
+
+	)
+
+474 #ñi‡
+	`deföed
+(
+_NONSTD_SOURCE
+)
+
+475 
+	#__DARWIN_UNIX03
+ 0
+
+	)
+
+477 #i‡
+	`deföed
+(
+__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__
+) && ((__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__-0) < 1050)
+
+478 
+	#__DARWIN_UNIX03
+ 0
+
+	)
+
+480 
+	#__DARWIN_UNIX03
+ 1
+
+	)
+
+485 #i‡!
+	`deföed
+(
+__DARWIN_64_BIT_INO_T
+)
+
+486 #i‡ 
+	`deföed
+(
+_DARWIN_USE_64_BIT_INODE
+)
+
+487 #i‡
+	`deföed
+(
+_DARWIN_NO_64_BIT_INODE
+)
+
+490 
+	#__DARWIN_64_BIT_INO_T
+ 1
+
+	)
+
+491 #ñi‡
+	`deföed
+(
+_DARWIN_NO_64_BIT_INODE
+)
+
+492 #i‡
+__DARWIN_ONLY_64_BIT_INO_T
+
+
+495 
+	#__DARWIN_64_BIT_INO_T
+ 0
+
+	)
+
+497 #i‡
+__DARWIN_ONLY_64_BIT_INO_T
+
+
+498 
+	#__DARWIN_64_BIT_INO_T
+ 1
+
+	)
+
+499 #ñi‡
+	`deföed
+(
+__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__
+Ë&& ((__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__-0Ë< 1060Ë|| 
+__DARWIN_UNIX03
+ == 0
+
+500 
+	#__DARWIN_64_BIT_INO_T
+ 0
+
+	)
+
+502 
+	#__DARWIN_64_BIT_INO_T
+ 1
+
+	)
+
+507 #i‡!
+	`deföed
+(
+__DARWIN_VERS_1050
+)
+
+508 #i‡ 
+__DARWIN_ONLY_VERS_1050
+
+
+509 
+	#__DARWIN_VERS_1050
+ 1
+
+	)
+
+510 #ñi‡
+	`deföed
+(
+__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__
+Ë&& ((__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__-0Ë< 1050Ë|| 
+__DARWIN_UNIX03
+ == 0
+
+511 
+	#__DARWIN_VERS_1050
+ 0
+
+	)
+
+513 
+	#__DARWIN_VERS_1050
+ 1
+
+	)
+
+517 #i‡!
+	`deföed
+(
+__DARWIN_NON_CANCELABLE
+)
+
+518 
+	#__DARWIN_NON_CANCELABLE
+ 0
+
+	)
+
+524 #i‡
+__DARWIN_UNIX03
+
+
+525 #i‡
+__DARWIN_ONLY_UNIX_CONFORMANCE
+
+
+526 
+	#__DARWIN_SUF_UNIX03
+
+
+	)
+
+528 
+	#__DARWIN_SUF_UNIX03
+ "$UNIX2003"
+
+	)
+
+531 #i‡
+__DARWIN_64_BIT_INO_T
+
+
+532 #i‡
+__DARWIN_ONLY_64_BIT_INO_T
+
+
+533 
+	#__DARWIN_SUF_64_BIT_INO_T
+
+
+	)
+
+535 
+	#__DARWIN_SUF_64_BIT_INO_T
+ "$INODE64"
+
+	)
+
+538 
+	#__DARWIN_SUF_64_BIT_INO_T
+
+
+	)
+
+541 #i‡
+__DARWIN_VERS_1050
+
+
+542 #i‡
+__DARWIN_ONLY_VERS_1050
+
+
+543 
+	#__DARWIN_SUF_1050
+
+
+	)
+
+545 
+	#__DARWIN_SUF_1050
+ "$1050"
+
+	)
+
+548 
+	#__DARWIN_SUF_1050
+
+
+	)
+
+551 #i‡
+__DARWIN_NON_CANCELABLE
+
+
+552 
+	#__DARWIN_SUF_NON_CANCELABLE
+ "$NOCANCEL"
+
+	)
+
+554 
+	#__DARWIN_SUF_NON_CANCELABLE
+
+
+	)
+
+558 
+	#__DARWIN_SUF_UNIX03
+
+
+	)
+
+559 
+	#__DARWIN_SUF_64_BIT_INO_T
+
+
+	)
+
+560 
+	#__DARWIN_SUF_NON_CANCELABLE
+
+
+	)
+
+561 
+	#__DARWIN_SUF_1050
+
+
+	)
+
+564 
+	#__DARWIN_SUF_EXTSN
+ "$DARWIN_EXTSN"
+
+	)
+
+569 
+	#__DARWIN_ALIAS
+(
+sym
+Ë
+	`__asm
+("_" 
+	`__STRING
+(symË
+__DARWIN_SUF_UNIX03
+)
+
+	)
+
+570 
+	#__DARWIN_ALIAS_C
+(
+sym
+Ë
+	`__asm
+("_" 
+	`__STRING
+(symË
+__DARWIN_SUF_NON_CANCELABLE
+ 
+__DARWIN_SUF_UNIX03
+)
+
+	)
+
+571 
+	#__DARWIN_ALIAS_I
+(
+sym
+Ë
+	`__asm
+("_" 
+	`__STRING
+(symË
+__DARWIN_SUF_64_BIT_INO_T
+ 
+__DARWIN_SUF_UNIX03
+)
+
+	)
+
+572 
+	#__DARWIN_NOCANCEL
+(
+sym
+Ë
+	`__asm
+("_" 
+	`__STRING
+(symË
+__DARWIN_SUF_NON_CANCELABLE
+)
+
+	)
+
+573 
+	#__DARWIN_INODE64
+(
+sym
+Ë
+	`__asm
+("_" 
+	`__STRING
+(symË
+__DARWIN_SUF_64_BIT_INO_T
+)
+
+	)
+
+575 
+	#__DARWIN_1050
+(
+sym
+Ë
+	`__asm
+("_" 
+	`__STRING
+(symË
+__DARWIN_SUF_1050
+)
+
+	)
+
+576 
+	#__DARWIN_1050ALIAS
+(
+sym
+Ë
+	`__asm
+("_" 
+	`__STRING
+(symË
+__DARWIN_SUF_1050
+ 
+__DARWIN_SUF_UNIX03
+)
+
+	)
+
+577 
+	#__DARWIN_1050ALIAS_C
+(
+sym
+Ë
+	`__asm
+("_" 
+	`__STRING
+(symË
+__DARWIN_SUF_1050
+ 
+__DARWIN_SUF_NON_CANCELABLE
+ 
+__DARWIN_SUF_UNIX03
+)
+
+	)
+
+578 
+	#__DARWIN_1050ALIAS_I
+(
+sym
+Ë
+	`__asm
+("_" 
+	`__STRING
+(symË
+__DARWIN_SUF_1050
+ 
+__DARWIN_SUF_64_BIT_INO_T
+ 
+__DARWIN_SUF_UNIX03
+)
+
+	)
+
+579 
+	#__DARWIN_1050INODE64
+(
+sym
+Ë
+	`__asm
+("_" 
+	`__STRING
+(symË
+__DARWIN_SUF_1050
+ 
+__DARWIN_SUF_64_BIT_INO_T
+)
+
+	)
+
+581 
+	#__DARWIN_EXTSN
+(
+sym
+Ë
+	`__asm
+("_" 
+	`__STRING
+(symË
+__DARWIN_SUF_EXTSN
+)
+
+	)
+
+582 
+	#__DARWIN_EXTSN_C
+(
+sym
+Ë
+	`__asm
+("_" 
+	`__STRING
+(symË
+__DARWIN_SUF_EXTSN
+ 
+__DARWIN_SUF_NON_CANCELABLE
+)
+
+	)
+
+587 
+	~<sys/_symbﬁ_Æüsög.h
+>
+
+589 #i‡
+	`deföed
+(
+__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__
+)
+
+590 
+	#__DARWIN_ALIAS_STARTING
+(
+_mac
+, 
+_ùh⁄e
+, 
+x
+Ë
+__DARWIN_ALIAS_STARTING_IPHONE_
+##
+	`_ùh⁄e
+(x)
+
+	)
+
+591 #ñi‡
+	`deföed
+(
+__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__
+)
+
+592 
+	#__DARWIN_ALIAS_STARTING
+(
+_mac
+, 
+_ùh⁄e
+, 
+x
+Ë
+__DARWIN_ALIAS_STARTING_MAC_
+##
+	`_mac
+(x)
+
+	)
+
+594 
+	#__DARWIN_ALIAS_STARTING
+(
+_mac
+, 
+_ùh⁄e
+, 
+x
+Ë
+	)
+x
+
+619 #i‡
+	`deföed
+(
+_POSIX_C_SOURCE
+) && _POSIX_C_SOURCE == 1L
+
+620 #unde‡
+_POSIX_C_SOURCE
+
+
+621 
+	#_POSIX_C_SOURCE
+ 199009L
+
+	)
+
+625 #i‡
+	`deföed
+(
+_POSIX_C_SOURCE
+) && _POSIX_C_SOURCE == 2L
+
+626 #unde‡
+_POSIX_C_SOURCE
+
+
+627 
+	#_POSIX_C_SOURCE
+ 199209L
+
+	)
+
+631 #ifde‡
+_XOPEN_SOURCE
+
+
+632 #i‡
+_XOPEN_SOURCE
+ - 0L >700L && (!
+	`deföed
+(
+_POSIX_C_SOURCE
+) || _POSIX_C_SOURCE - 0L < 200809L)
+
+633 #unde‡
+_POSIX_C_SOURCE
+
+
+634 
+	#_POSIX_C_SOURCE
+ 200809L
+
+	)
+
+635 #ñi‡
+_XOPEN_SOURCE
+ - 0L >600L && (!
+	`deföed
+(
+_POSIX_C_SOURCE
+) || _POSIX_C_SOURCE - 0L < 200112L)
+
+636 #unde‡
+_POSIX_C_SOURCE
+
+
+637 
+	#_POSIX_C_SOURCE
+ 200112L
+
+	)
+
+638 #ñi‡
+_XOPEN_SOURCE
+ - 0L >500L && (!
+	`deföed
+(
+_POSIX_C_SOURCE
+) || _POSIX_C_SOURCE - 0L < 199506L)
+
+639 #unde‡
+_POSIX_C_SOURCE
+
+
+640 
+	#_POSIX_C_SOURCE
+ 199506L
+
+	)
+
+648 #i‡
+	`deföed
+(
+_POSIX_SOURCE
+Ë&& !deföed(
+_POSIX_C_SOURCE
+)
+
+649 
+	#_POSIX_C_SOURCE
+ 198808L
+
+	)
+
+653 
+	~<sys/_posix_avaûabûôy.h
+>
+
+655 
+	#__POSIX_C_DEPRECATED
+(
+vî
+Ë
+___POSIX_C_DEPRECATED_STARTING_
+##
+	)
+ver
+
+663 
+	#__DARWIN_C_ANSI
+ 010000L
+
+	)
+
+664 
+	#__DARWIN_C_FULL
+ 900000L
+
+	)
+
+666 #i‡ 
+	`deföed
+(
+_ANSI_SOURCE
+)
+
+667 
+	#__DARWIN_C_LEVEL
+ 
+__DARWIN_C_ANSI
+
+
+	)
+
+668 #ñi‡
+	`deföed
+(
+_POSIX_C_SOURCE
+Ë&& !deföed(
+_DARWIN_C_SOURCE
+Ë&& !deföed(
+_NONSTD_SOURCE
+)
+
+669 
+	#__DARWIN_C_LEVEL
+ 
+_POSIX_C_SOURCE
+
+
+	)
+
+671 
+	#__DARWIN_C_LEVEL
+ 
+__DARWIN_C_FULL
+
+
+	)
+
+678 #i‡!
+	`deföed
+(
+__STDC_WANT_LIB_EXT1__
+Ë&& !deföed(
+__STRICT_ANSI__
+Ë&& 
+__DARWIN_C_LEVEL
+ >
+__DARWIN_C_FULL
+
+
+679 
+	#__STDC_WANT_LIB_EXT1__
+ 1
+
+	)
+
+687 
+	#__DARWIN_NO_LONG_LONG
+ (
+	`deföed
+(
+__STRICT_ANSI__
+) \
+
+688 && (
+__STDC_VERSION__
+-0 < 199901L) \
+
+689 && !
+	`deföed
+(
+__GNUG__
+))
+
+	)
+
+699 #i‡
+__DARWIN_64_BIT_INO_T
+
+
+700 
+	#_DARWIN_FEATURE_64_BIT_INODE
+ 1
+
+	)
+
+709 #i‡
+__DARWIN_ONLY_64_BIT_INO_T
+
+
+710 
+	#_DARWIN_FEATURE_ONLY_64_BIT_INODE
+ 1
+
+	)
+
+717 #i‡
+__DARWIN_ONLY_VERS_1050
+
+
+718 
+	#_DARWIN_FEATURE_ONLY_VERS_1050
+ 1
+
+	)
+
+725 #i‡
+__DARWIN_ONLY_UNIX_CONFORMANCE
+
+
+726 
+	#_DARWIN_FEATURE_ONLY_UNIX_CONFORMANCE
+ 1
+
+	)
+
+733 #i‡
+__DARWIN_UNIX03
+
+
+734 
+	#_DARWIN_FEATURE_UNIX_CONFORMANCE
+ 3
+
+	)
+
+743 #i‚de‡
+__CAST_AWAY_QUALIFIER
+
+
+744 
+	#__CAST_AWAY_QUALIFIER
+(
+v¨übÀ
+, 
+quÆifõr
+, 
+ty≥
+Ë—y≥Ë()(v¨übÀ)
+
+	)
+
+751 #i‚de‡
+__XNU_PRIVATE_EXTERN
+
+
+752 
+	#__XNU_PRIVATE_EXTERN
+ 
+	`__©åibuã__
+((
+	`visibûôy
+("hiddí")))
+
+	)
+
+758 #i‡!
+	`deföed
+(
+__sys_cdefs_¨ch_unknown__
+Ë&& deföed(
+__i386__
+)
+
+759 #ñi‡!
+	`deföed
+(
+__sys_cdefs_¨ch_unknown__
+Ë&& deföed(
+__x86_64__
+)
+
+761 #îr‹ 
+Unsuµ‹ãd
+ 
+¨chôe˘uª
+
+
+	@/usr/include/i386/_types.h
+
+28 #i‚def 
+_BSD_I386__TYPES_H_
+
+
+29 
+	#_BSD_I386__TYPES_H_
+
+
+	)
+
+36 #ifde‡
+__GNUC__
+
+
+37 
+__sig√d
+ 
+	t__öt8_t
+;
+
+39 
+	t__öt8_t
+;
+
+41 
+	t__uöt8_t
+;
+
+42 
+	t__öt16_t
+;
+
+43 
+	t__uöt16_t
+;
+
+44 
+	t__öt32_t
+;
+
+45 
+	t__uöt32_t
+;
+
+46 
+	t__öt64_t
+;
+
+47 
+	t__uöt64_t
+;
+
+49 
+	t__d¨wö_öçå_t
+;
+
+50 
+	t__d¨wö_«tuøl_t
+;
+
+70 
+	t__d¨wö_˘_ru√_t
+;
+
+77 
+	m__mb°©e8
+[128];
+
+78 
+	m_mb°©eL
+;
+
+79 } 
+	t__mb°©e_t
+;
+
+81 
+__mb°©e_t
+ 
+	t__d¨wö_mb°©e_t
+;
+
+83 #i‡
+deföed
+(
+__PTRDIFF_TYPE__
+)
+
+84 
+__PTRDIFF_TYPE__
+ 
+	t__d¨wö_±rdiff_t
+;
+
+85 #ñi‡
+deföed
+(
+__LP64__
+)
+
+86 
+	t__d¨wö_±rdiff_t
+;
+
+88 
+	t__d¨wö_±rdiff_t
+;
+
+91 #i‡
+deföed
+(
+__SIZE_TYPE__
+)
+
+92 
+__SIZE_TYPE__
+ 
+	t__d¨wö_size_t
+;
+
+94 
+	t__d¨wö_size_t
+;
+
+97 #i‡(
+__GNUC__
+ > 2)
+
+98 
+__buûtö_va_li°
+ 
+	t__d¨wö_va_li°
+;
+
+100 * 
+	t__d¨wö_va_li°
+;
+
+103 #i‡
+deföed
+(
+__WCHAR_TYPE__
+)
+
+104 
+__WCHAR_TYPE__
+ 
+	t__d¨wö_wch¨_t
+;
+
+106 
+__d¨wö_˘_ru√_t
+ 
+	t__d¨wö_wch¨_t
+;
+
+109 
+__d¨wö_wch¨_t
+ 
+	t__d¨wö_ru√_t
+;
+
+111 #i‡
+deföed
+(
+__WINT_TYPE__
+)
+
+112 
+__WINT_TYPE__
+ 
+	t__d¨wö_wöt_t
+;
+
+114 
+__d¨wö_˘_ru√_t
+ 
+	t__d¨wö_wöt_t
+;
+
+117 
+	t__d¨wö_˛ock_t
+;
+
+118 
+__uöt32_t
+ 
+	t__d¨wö_sockÀn_t
+;
+
+119 
+	t__d¨wö_ssize_t
+;
+
+120 
+	t__d¨wö_time_t
+;
+
+	@/usr/include/sys/_posix_availability.h
+
+28 #i‚de‡
+_CDEFS_H_
+
+
+32 #i‡!
+deföed
+(
+_DARWIN_C_SOURCE
+Ë&& deföed(
+_POSIX_C_SOURCE
+) && _POSIX_C_SOURCE >= 198808L
+
+33 
+	#___POSIX_C_DEPRECATED_STARTING_198808L
+ 
+__dïªˇãd
+
+
+	)
+
+35 
+	#___POSIX_C_DEPRECATED_STARTING_198808L
+
+
+	)
+
+38 #i‡!
+deföed
+(
+_DARWIN_C_SOURCE
+Ë&& deföed(
+_POSIX_C_SOURCE
+) && _POSIX_C_SOURCE >= 199009L
+
+39 
+	#___POSIX_C_DEPRECATED_STARTING_199009L
+ 
+__dïªˇãd
+
+
+	)
+
+41 
+	#___POSIX_C_DEPRECATED_STARTING_199009L
+
+
+	)
+
+44 #i‡!
+deföed
+(
+_DARWIN_C_SOURCE
+Ë&& deföed(
+_POSIX_C_SOURCE
+) && _POSIX_C_SOURCE >= 199209L
+
+45 
+	#___POSIX_C_DEPRECATED_STARTING_199209L
+ 
+__dïªˇãd
+
+
+	)
+
+47 
+	#___POSIX_C_DEPRECATED_STARTING_199209L
+
+
+	)
+
+50 #i‡!
+deföed
+(
+_DARWIN_C_SOURCE
+Ë&& deföed(
+_POSIX_C_SOURCE
+) && _POSIX_C_SOURCE >= 199309L
+
+51 
+	#___POSIX_C_DEPRECATED_STARTING_199309L
+ 
+__dïªˇãd
+
+
+	)
+
+53 
+	#___POSIX_C_DEPRECATED_STARTING_199309L
+
+
+	)
+
+56 #i‡!
+deföed
+(
+_DARWIN_C_SOURCE
+Ë&& deföed(
+_POSIX_C_SOURCE
+) && _POSIX_C_SOURCE >= 199506L
+
+57 
+	#___POSIX_C_DEPRECATED_STARTING_199506L
+ 
+__dïªˇãd
+
+
+	)
+
+59 
+	#___POSIX_C_DEPRECATED_STARTING_199506L
+
+
+	)
+
+62 #i‡!
+deföed
+(
+_DARWIN_C_SOURCE
+Ë&& deföed(
+_POSIX_C_SOURCE
+) && _POSIX_C_SOURCE >= 200112L
+
+63 
+	#___POSIX_C_DEPRECATED_STARTING_200112L
+ 
+__dïªˇãd
+
+
+	)
+
+65 
+	#___POSIX_C_DEPRECATED_STARTING_200112L
+
+
+	)
+
+68 #i‡!
+deföed
+(
+_DARWIN_C_SOURCE
+Ë&& deföed(
+_POSIX_C_SOURCE
+) && _POSIX_C_SOURCE >= 200809L
+
+69 
+	#___POSIX_C_DEPRECATED_STARTING_200809L
+ 
+__dïªˇãd
+
+
+	)
+
+71 
+	#___POSIX_C_DEPRECATED_STARTING_200809L
+
+
+	)
+
+	@/usr/include/sys/_symbol_aliasing.h
+
+28 #i‚de‡
+_CDEFS_H_
+
+
+32 #i‡
+deföed
+(
+__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__
+) && __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ >= 20000
+
+33 
+	#__DARWIN_ALIAS_STARTING_IPHONE___IPHONE_2_0
+(
+x
+Ë
+	)
+x
+
+35 
+	#__DARWIN_ALIAS_STARTING_IPHONE___IPHONE_2_0
+(
+x
+)
+
+	)
+
+38 #i‡
+deföed
+(
+__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__
+) && __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ >= 20100
+
+39 
+	#__DARWIN_ALIAS_STARTING_IPHONE___IPHONE_2_1
+(
+x
+Ë
+	)
+x
+
+41 
+	#__DARWIN_ALIAS_STARTING_IPHONE___IPHONE_2_1
+(
+x
+)
+
+	)
+
+44 #i‡
+deföed
+(
+__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__
+) && __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ >= 20200
+
+45 
+	#__DARWIN_ALIAS_STARTING_IPHONE___IPHONE_2_2
+(
+x
+Ë
+	)
+x
+
+47 
+	#__DARWIN_ALIAS_STARTING_IPHONE___IPHONE_2_2
+(
+x
+)
+
+	)
+
+50 #i‡
+deföed
+(
+__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__
+) && __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ >= 30000
+
+51 
+	#__DARWIN_ALIAS_STARTING_IPHONE___IPHONE_3_0
+(
+x
+Ë
+	)
+x
+
+53 
+	#__DARWIN_ALIAS_STARTING_IPHONE___IPHONE_3_0
+(
+x
+)
+
+	)
+
+56 #i‡
+deföed
+(
+__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__
+) && __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ >= 30100
+
+57 
+	#__DARWIN_ALIAS_STARTING_IPHONE___IPHONE_3_1
+(
+x
+Ë
+	)
+x
+
+59 
+	#__DARWIN_ALIAS_STARTING_IPHONE___IPHONE_3_1
+(
+x
+)
+
+	)
+
+62 #i‡
+deföed
+(
+__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__
+) && __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ >= 30200
+
+63 
+	#__DARWIN_ALIAS_STARTING_IPHONE___IPHONE_3_2
+(
+x
+Ë
+	)
+x
+
+65 
+	#__DARWIN_ALIAS_STARTING_IPHONE___IPHONE_3_2
+(
+x
+)
+
+	)
+
+68 #i‡
+deföed
+(
+__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__
+) && __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ >= 40000
+
+69 
+	#__DARWIN_ALIAS_STARTING_IPHONE___IPHONE_4_0
+(
+x
+Ë
+	)
+x
+
+71 
+	#__DARWIN_ALIAS_STARTING_IPHONE___IPHONE_4_0
+(
+x
+)
+
+	)
+
+74 #i‡
+deföed
+(
+__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__
+) && __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ >= 40100
+
+75 
+	#__DARWIN_ALIAS_STARTING_IPHONE___IPHONE_4_1
+(
+x
+Ë
+	)
+x
+
+77 
+	#__DARWIN_ALIAS_STARTING_IPHONE___IPHONE_4_1
+(
+x
+)
+
+	)
+
+80 #i‡
+deföed
+(
+__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__
+) && __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ >= 40200
+
+81 
+	#__DARWIN_ALIAS_STARTING_IPHONE___IPHONE_4_2
+(
+x
+Ë
+	)
+x
+
+83 
+	#__DARWIN_ALIAS_STARTING_IPHONE___IPHONE_4_2
+(
+x
+)
+
+	)
+
+86 #i‡
+deföed
+(
+__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__
+) && __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ >= 40300
+
+87 
+	#__DARWIN_ALIAS_STARTING_IPHONE___IPHONE_4_3
+(
+x
+Ë
+	)
+x
+
+89 
+	#__DARWIN_ALIAS_STARTING_IPHONE___IPHONE_4_3
+(
+x
+)
+
+	)
+
+92 #i‡
+deföed
+(
+__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__
+) && __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ >= 50000
+
+93 
+	#__DARWIN_ALIAS_STARTING_IPHONE___IPHONE_5_0
+(
+x
+Ë
+	)
+x
+
+95 
+	#__DARWIN_ALIAS_STARTING_IPHONE___IPHONE_5_0
+(
+x
+)
+
+	)
+
+98 #i‡
+deföed
+(
+__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__
+) && __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ >= 50100
+
+99 
+	#__DARWIN_ALIAS_STARTING_IPHONE___IPHONE_5_1
+(
+x
+Ë
+	)
+x
+
+101 
+	#__DARWIN_ALIAS_STARTING_IPHONE___IPHONE_5_1
+(
+x
+)
+
+	)
+
+104 #i‡
+deföed
+(
+__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__
+) && __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ >= 60000
+
+105 
+	#__DARWIN_ALIAS_STARTING_IPHONE___IPHONE_6_0
+(
+x
+Ë
+	)
+x
+
+107 
+	#__DARWIN_ALIAS_STARTING_IPHONE___IPHONE_6_0
+(
+x
+)
+
+	)
+
+110 #i‡
+deföed
+(
+__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__
+) && __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ >= 60100
+
+111 
+	#__DARWIN_ALIAS_STARTING_IPHONE___IPHONE_6_1
+(
+x
+Ë
+	)
+x
+
+113 
+	#__DARWIN_ALIAS_STARTING_IPHONE___IPHONE_6_1
+(
+x
+)
+
+	)
+
+116 #i‡
+deföed
+(
+__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__
+) && __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ >= 70000
+
+117 
+	#__DARWIN_ALIAS_STARTING_IPHONE___IPHONE_7_0
+(
+x
+Ë
+	)
+x
+
+119 
+	#__DARWIN_ALIAS_STARTING_IPHONE___IPHONE_7_0
+(
+x
+)
+
+	)
+
+122 #i‡
+deföed
+(
+__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__
+) && __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ >= 70100
+
+123 
+	#__DARWIN_ALIAS_STARTING_IPHONE___IPHONE_7_1
+(
+x
+Ë
+	)
+x
+
+125 
+	#__DARWIN_ALIAS_STARTING_IPHONE___IPHONE_7_1
+(
+x
+)
+
+	)
+
+128 #i‡
+deföed
+(
+__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__
+) && __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ >= 80000
+
+129 
+	#__DARWIN_ALIAS_STARTING_IPHONE___IPHONE_8_0
+(
+x
+Ë
+	)
+x
+
+131 
+	#__DARWIN_ALIAS_STARTING_IPHONE___IPHONE_8_0
+(
+x
+)
+
+	)
+
+134 #i‡
+deföed
+(
+__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__
+) && __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ >= 80100
+
+135 
+	#__DARWIN_ALIAS_STARTING_IPHONE___IPHONE_8_1
+(
+x
+Ë
+	)
+x
+
+137 
+	#__DARWIN_ALIAS_STARTING_IPHONE___IPHONE_8_1
+(
+x
+)
+
+	)
+
+140 #i‡
+deföed
+(
+__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__
+) && __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ >= 80200
+
+141 
+	#__DARWIN_ALIAS_STARTING_IPHONE___IPHONE_8_2
+(
+x
+Ë
+	)
+x
+
+143 
+	#__DARWIN_ALIAS_STARTING_IPHONE___IPHONE_8_2
+(
+x
+)
+
+	)
+
+146 #i‡
+deföed
+(
+__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__
+) && __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ >= 80300
+
+147 
+	#__DARWIN_ALIAS_STARTING_IPHONE___IPHONE_8_3
+(
+x
+Ë
+	)
+x
+
+149 
+	#__DARWIN_ALIAS_STARTING_IPHONE___IPHONE_8_3
+(
+x
+)
+
+	)
+
+152 #i‡
+deföed
+(
+__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__
+) && __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ >= 80400
+
+153 
+	#__DARWIN_ALIAS_STARTING_IPHONE___IPHONE_8_4
+(
+x
+Ë
+	)
+x
+
+155 
+	#__DARWIN_ALIAS_STARTING_IPHONE___IPHONE_8_4
+(
+x
+)
+
+	)
+
+158 #i‡
+deföed
+(
+__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__
+) && __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ >= 90000
+
+159 
+	#__DARWIN_ALIAS_STARTING_IPHONE___IPHONE_9_0
+(
+x
+Ë
+	)
+x
+
+161 
+	#__DARWIN_ALIAS_STARTING_IPHONE___IPHONE_9_0
+(
+x
+)
+
+	)
+
+164 #i‡
+deföed
+(
+__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__
+) && __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ >= 90100
+
+165 
+	#__DARWIN_ALIAS_STARTING_IPHONE___IPHONE_9_1
+(
+x
+Ë
+	)
+x
+
+167 
+	#__DARWIN_ALIAS_STARTING_IPHONE___IPHONE_9_1
+(
+x
+)
+
+	)
+
+170 #i‡
+deföed
+(
+__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__
+) && __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ >= 90200
+
+171 
+	#__DARWIN_ALIAS_STARTING_IPHONE___IPHONE_9_2
+(
+x
+Ë
+	)
+x
+
+173 
+	#__DARWIN_ALIAS_STARTING_IPHONE___IPHONE_9_2
+(
+x
+)
+
+	)
+
+176 #i‡
+deföed
+(
+__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__
+) && __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ >= 90300
+
+177 
+	#__DARWIN_ALIAS_STARTING_IPHONE___IPHONE_9_3
+(
+x
+Ë
+	)
+x
+
+179 
+	#__DARWIN_ALIAS_STARTING_IPHONE___IPHONE_9_3
+(
+x
+)
+
+	)
+
+182 #i‡
+deföed
+(
+__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__
+) && __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ >= 100000
+
+183 
+	#__DARWIN_ALIAS_STARTING_IPHONE___IPHONE_10_0
+(
+x
+Ë
+	)
+x
+
+185 
+	#__DARWIN_ALIAS_STARTING_IPHONE___IPHONE_10_0
+(
+x
+)
+
+	)
+
+188 #i‡
+deföed
+(
+__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__
+) && __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ >= 100100
+
+189 
+	#__DARWIN_ALIAS_STARTING_IPHONE___IPHONE_10_1
+(
+x
+Ë
+	)
+x
+
+191 
+	#__DARWIN_ALIAS_STARTING_IPHONE___IPHONE_10_1
+(
+x
+)
+
+	)
+
+194 #i‡
+deföed
+(
+__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__
+) && __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ >= 100200
+
+195 
+	#__DARWIN_ALIAS_STARTING_IPHONE___IPHONE_10_2
+(
+x
+Ë
+	)
+x
+
+197 
+	#__DARWIN_ALIAS_STARTING_IPHONE___IPHONE_10_2
+(
+x
+)
+
+	)
+
+200 #i‡
+deföed
+(
+__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__
+) && __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ >= 100300
+
+201 
+	#__DARWIN_ALIAS_STARTING_IPHONE___IPHONE_10_3
+(
+x
+Ë
+	)
+x
+
+203 
+	#__DARWIN_ALIAS_STARTING_IPHONE___IPHONE_10_3
+(
+x
+)
+
+	)
+
+206 #i‡
+deföed
+(
+__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__
+) && __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ >= 1000
+
+207 
+	#__DARWIN_ALIAS_STARTING_MAC___MAC_10_0
+(
+x
+Ë
+	)
+x
+
+209 
+	#__DARWIN_ALIAS_STARTING_MAC___MAC_10_0
+(
+x
+)
+
+	)
+
+212 #i‡
+deföed
+(
+__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__
+) && __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ >= 1010
+
+213 
+	#__DARWIN_ALIAS_STARTING_MAC___MAC_10_1
+(
+x
+Ë
+	)
+x
+
+215 
+	#__DARWIN_ALIAS_STARTING_MAC___MAC_10_1
+(
+x
+)
+
+	)
+
+218 #i‡
+deföed
+(
+__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__
+) && __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ >= 1020
+
+219 
+	#__DARWIN_ALIAS_STARTING_MAC___MAC_10_2
+(
+x
+Ë
+	)
+x
+
+221 
+	#__DARWIN_ALIAS_STARTING_MAC___MAC_10_2
+(
+x
+)
+
+	)
+
+224 #i‡
+deföed
+(
+__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__
+) && __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ >= 1030
+
+225 
+	#__DARWIN_ALIAS_STARTING_MAC___MAC_10_3
+(
+x
+Ë
+	)
+x
+
+227 
+	#__DARWIN_ALIAS_STARTING_MAC___MAC_10_3
+(
+x
+)
+
+	)
+
+230 #i‡
+deföed
+(
+__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__
+) && __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ >= 1040
+
+231 
+	#__DARWIN_ALIAS_STARTING_MAC___MAC_10_4
+(
+x
+Ë
+	)
+x
+
+233 
+	#__DARWIN_ALIAS_STARTING_MAC___MAC_10_4
+(
+x
+)
+
+	)
+
+236 #i‡
+deföed
+(
+__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__
+) && __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ >= 1050
+
+237 
+	#__DARWIN_ALIAS_STARTING_MAC___MAC_10_5
+(
+x
+Ë
+	)
+x
+
+239 
+	#__DARWIN_ALIAS_STARTING_MAC___MAC_10_5
+(
+x
+)
+
+	)
+
+242 #i‡
+deföed
+(
+__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__
+) && __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ >= 1060
+
+243 
+	#__DARWIN_ALIAS_STARTING_MAC___MAC_10_6
+(
+x
+Ë
+	)
+x
+
+245 
+	#__DARWIN_ALIAS_STARTING_MAC___MAC_10_6
+(
+x
+)
+
+	)
+
+248 #i‡
+deföed
+(
+__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__
+) && __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ >= 1070
+
+249 
+	#__DARWIN_ALIAS_STARTING_MAC___MAC_10_7
+(
+x
+Ë
+	)
+x
+
+251 
+	#__DARWIN_ALIAS_STARTING_MAC___MAC_10_7
+(
+x
+)
+
+	)
+
+254 #i‡
+deföed
+(
+__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__
+) && __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ >= 1080
+
+255 
+	#__DARWIN_ALIAS_STARTING_MAC___MAC_10_8
+(
+x
+Ë
+	)
+x
+
+257 
+	#__DARWIN_ALIAS_STARTING_MAC___MAC_10_8
+(
+x
+)
+
+	)
+
+260 #i‡
+deföed
+(
+__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__
+) && __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ >= 1090
+
+261 
+	#__DARWIN_ALIAS_STARTING_MAC___MAC_10_9
+(
+x
+Ë
+	)
+x
+
+263 
+	#__DARWIN_ALIAS_STARTING_MAC___MAC_10_9
+(
+x
+)
+
+	)
+
+266 #i‡
+deföed
+(
+__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__
+) && __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ >= 101000
+
+267 
+	#__DARWIN_ALIAS_STARTING_MAC___MAC_10_10
+(
+x
+Ë
+	)
+x
+
+269 
+	#__DARWIN_ALIAS_STARTING_MAC___MAC_10_10
+(
+x
+)
+
+	)
+
+272 #i‡
+deföed
+(
+__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__
+) && __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ >= 101002
+
+273 
+	#__DARWIN_ALIAS_STARTING_MAC___MAC_10_10_2
+(
+x
+Ë
+	)
+x
+
+275 
+	#__DARWIN_ALIAS_STARTING_MAC___MAC_10_10_2
+(
+x
+)
+
+	)
+
+278 #i‡
+deföed
+(
+__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__
+) && __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ >= 101003
+
+279 
+	#__DARWIN_ALIAS_STARTING_MAC___MAC_10_10_3
+(
+x
+Ë
+	)
+x
+
+281 
+	#__DARWIN_ALIAS_STARTING_MAC___MAC_10_10_3
+(
+x
+)
+
+	)
+
+284 #i‡
+deföed
+(
+__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__
+) && __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ >= 101100
+
+285 
+	#__DARWIN_ALIAS_STARTING_MAC___MAC_10_11
+(
+x
+Ë
+	)
+x
+
+287 
+	#__DARWIN_ALIAS_STARTING_MAC___MAC_10_11
+(
+x
+)
+
+	)
+
+290 #i‡
+deföed
+(
+__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__
+) && __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ >= 101102
+
+291 
+	#__DARWIN_ALIAS_STARTING_MAC___MAC_10_11_2
+(
+x
+Ë
+	)
+x
+
+293 
+	#__DARWIN_ALIAS_STARTING_MAC___MAC_10_11_2
+(
+x
+)
+
+	)
+
+296 #i‡
+deföed
+(
+__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__
+) && __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ >= 101103
+
+297 
+	#__DARWIN_ALIAS_STARTING_MAC___MAC_10_11_3
+(
+x
+Ë
+	)
+x
+
+299 
+	#__DARWIN_ALIAS_STARTING_MAC___MAC_10_11_3
+(
+x
+)
+
+	)
+
+302 #i‡
+deföed
+(
+__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__
+) && __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ >= 101104
+
+303 
+	#__DARWIN_ALIAS_STARTING_MAC___MAC_10_11_4
+(
+x
+Ë
+	)
+x
+
+305 
+	#__DARWIN_ALIAS_STARTING_MAC___MAC_10_11_4
+(
+x
+)
+
+	)
+
+308 #i‡
+deföed
+(
+__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__
+) && __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ >= 101200
+
+309 
+	#__DARWIN_ALIAS_STARTING_MAC___MAC_10_12
+(
+x
+Ë
+	)
+x
+
+311 
+	#__DARWIN_ALIAS_STARTING_MAC___MAC_10_12
+(
+x
+)
+
+	)
+
+314 #i‡
+deföed
+(
+__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__
+) && __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ >= 101201
+
+315 
+	#__DARWIN_ALIAS_STARTING_MAC___MAC_10_12_1
+(
+x
+Ë
+	)
+x
+
+317 
+	#__DARWIN_ALIAS_STARTING_MAC___MAC_10_12_1
+(
+x
+)
+
+	)
+
+320 #i‡
+deföed
+(
+__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__
+) && __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ >= 101202
+
+321 
+	#__DARWIN_ALIAS_STARTING_MAC___MAC_10_12_2
+(
+x
+Ë
+	)
+x
+
+323 
+	#__DARWIN_ALIAS_STARTING_MAC___MAC_10_12_2
+(
+x
+)
+
+	)
+
+326 #i‡
+deföed
+(
+__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__
+) && __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ >= 101204
+
+327 
+	#__DARWIN_ALIAS_STARTING_MAC___MAC_10_12_4
+(
+x
+Ë
+	)
+x
+
+329 
+	#__DARWIN_ALIAS_STARTING_MAC___MAC_10_12_4
+(
+x
+)
+
+	)
+
+	@
+1
+.
+1
+/usr/include
+28
+710
+led.c
+led.h
+main.c
+regs.h
+usart.c
+usart.h
+utils.c
+utils.h
+/usr/include/stdint.h
+/usr/include/_types/_intmax_t.h
+/usr/include/_types/_uint16_t.h
+/usr/include/_types/_uint32_t.h
+/usr/include/_types/_uint64_t.h
+/usr/include/_types/_uint8_t.h
+/usr/include/_types/_uintmax_t.h
+/usr/include/sys/_types.h
+/usr/include/sys/_types/_int16_t.h
+/usr/include/sys/_types/_int32_t.h
+/usr/include/sys/_types/_int64_t.h
+/usr/include/sys/_types/_int8_t.h
+/usr/include/sys/_types/_intptr_t.h
+/usr/include/sys/_types/_uintptr_t.h
+/usr/include/machine/_types.h
+/usr/include/sys/_pthread/_pthread_types.h
+/usr/include/sys/cdefs.h
+/usr/include/i386/_types.h
+/usr/include/sys/_posix_availability.h
+/usr/include/sys/_symbol_aliasing.h

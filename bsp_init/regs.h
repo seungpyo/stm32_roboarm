@@ -21,9 +21,12 @@
 // GPIO AF masks; both for CRL and CRH
 #define GPIO_AF_MASK(pin, af) \
 	(((af)&0xF) << (4*((pin)&0x7)))
+// GPIO Pull Up / Pull down masks
+#define GPIO_PUPD_MASK(pin, pupd) \
+	(((pupd)&0x3) << (2*((pin)&0xF)))
 
 // GPIO mode mask;
-// this should be shifted to a given pin.
+// this should be used with GPIO_MODE_MASK
 #define GPIO_MODE_IN (0x0)
 #define GPIO_MODE_OUT (0x1)
 #define GPIO_MODE_AF (0x2)
@@ -31,8 +34,17 @@
 // reset state is analog.
 #define GPIO_MODE_RESET (0x3)
 
+// GPIO pull up/down mask;
+// this should be used with GPIO_PUPD_MASK
+#define GPIO_PUPD_NONE (0x0)
+#define GPIO_PUPD_UP (0x1)
+#define GPIO_PUPD_DOWN (0x2)
+#define GPIO_PUPD_RESV (0x3)
+#define GPIO_PUPD_RESET (0x3)
+
 // GPIO Port A registers
 #define GPIOA_MODER ((__REG)(GPIOA))
+#define GPIOA_PUPDR ((__REG)(GPIOA+0x0C))
 #define GPIOA_AFRL ((__REG)(GPIOA+0x20))
 #define GPIOA_AF_USART2_TX_MASK GPIO_AF_MASK(2, 7)
 #define GPIOA_AF_USART2_RX_MASK GPIO_AF_MASK(3, 7)
@@ -77,10 +89,16 @@
 #define SPI_CR1_LSBFIRST_MASK (0x00000080)
 #define SPI_CR1_SPE_MASK (0x00000040)
 #define SPI_CR1_BR_MASK (0x00000038)
+#define SPI_CR1_MSTR_MASK (0x00000004)
 #define SPI_CR1_BR_DIV2_MASK (0x00000000)
 #define SPI_CR1_BR_DIV4_MASK (0x00000008)
 #define SPI_CR1_BR_DIV8_MASK (0x00000010)
 #define SPI_CR1_BR_DIV16_MASK (0x00000018)
+
+#define SPI_SR_BSY_MASK (0x00000080)
+#define SPI_SR_OVR_MASK (0x00000400)
+#define SPI_SR_MODF_MASK (0x00000020)
+#define SPI_SR_CRCERR_MASK (0x00000010)
 #define SPI_SR_TXE_MASK (0x00000002)
 #define SPI_SR_RXNE_MASK (0x00000001)
 

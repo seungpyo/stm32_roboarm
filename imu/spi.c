@@ -55,6 +55,7 @@ void spi_init() {
 	printb(*(SPI1_CR1));
 	prints("\r\n");
 	*/
+
 	// Reset LSBFIRST bit
 	*(SPI1_CR1) &= ~SPI_CR1_LSBFIRST_MASK;
 	
@@ -65,6 +66,29 @@ void spi_init() {
 	printb(*(SPI1_CR1));
 	prints("\r\n");
 
+}
+
+void spi_enable() {
+	*(SPI1_CR1) |= SPI_CR1_SPE_MASK;
+}
+
+/**
+  * Disables SPI according to standard process.
+  * TODO: Infinite loops on some polling codes.
+  */
+void spi_disable() {
+	while(*(SPI1_SR) & SPI_SR_FTLVL) {
+		prints("txfifo not empty\r\n");	
+	}
+	while(*(SPI1_SR) * SPI_SR_BSY_MASK) {
+		prints("spi busy\r\n");
+	}
+	*(SPI1_CR1) &= ~SPI_CR1_SPE_MASK;
+	uint16_t blackhole;
+	while (*(SPI1_SR) & SPI_SR_FRLVL) {
+		prints("rxfifo not empty\r\n");
+		blackhole = *(SPI1_DR);
+	}
 }
 
 /**
@@ -85,15 +109,9 @@ void spi_deselect() {
 	}
 }
 
-
 spi_err_t spi_send(uint8_t data) {
 	int bomb = 0;
-	while(!(*(SPI1_SR) & SPI_SR_TXE_MASK)) {
-		if (bomb++>10) {
-			prints("Infinite loop detected while polling SPI TXE\r\n");
-			while(1);
-		}
-	}
+	while(!(*(SPI1_SR) & SPI_SR_TXE_MASK));
 	*(SPI1_DR) = data;
 	return spi_error();
 }
@@ -101,12 +119,7 @@ spi_err_t spi_send(uint8_t data) {
 spi_err_t spi_recv(uint8_t *data) {
 	uint8_t temp;
 	int bomb = 0;
-	while (!(*(SPI1_SR) & SPI_SR_RXNE_MASK)) {
-		if (bomb++>10) {
-			prints("Infinite loop detected while polling SPI RXNE\r\n");
-			while(1);
-		}
-	}
+	while (!(*(SPI1_SR) & SPI_SR_RXNE_MASK));
 	temp = (uint8_t)(*(SPI1_DR));
 	if (data != NULL) {
 		*data = temp;

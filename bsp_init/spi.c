@@ -110,8 +110,6 @@ void spi_perror() {
 	} else if (crcerror) {
 		prints("Error: SPI CRC error!\r\n");
 		while(1);
-	} else {
-		prints("No SPI error detected.\r\n");
 	}
 }
 

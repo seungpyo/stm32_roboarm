@@ -1,32 +1,52 @@
 #include "utils.h"
-/*
 #include "usart.h"
 
-// "0x"(2) + word(8) + '\0'(1) = 11 bytes
-#define WTOA_HEXBUFSIZE 11
-#define WTOA_BUFSIZE 32
-char wtoa_hexbuf[WTOA_HEXBUFSIZE] = "0x";
-char wtoa_buf[WTOA_BUFSIZE];
-char wtoa_stk[WTOA_BUFSIZE];
-static uint16_t wtoa_stk_top = 0;
+void prints(const char *str) {
+	usart_puts(str);
+}
 
-#define WTOA_HEX 16
-#define WTOA_DEC 10
-static char hex_lookup[] = { 
-	'0', '1', '2', '3', '4', '5', '6', '7', 
-	'8', '9', 'a', 'b', 'c', 'd', 'e', 'f'};
+char hexmap[] = "0123456789abcdef";
 
+void printx(uint32_t word) {
+	unsigned char buf[] = "0x00000000";
+	unsigned char byte;
 
-char * wtoa(uint32_t word, uint32_t radix) {
-	if (radix == 16) {
-		char *ptr = wtoa_hexbuf + 2;
-		
-		return wtoa_hexbuf;
-	} else {
-		return NULL;
+	byte = ((word & 0xFF000000) >> 24);
+	buf[2] = hexmap[(byte>>4)&0xF];
+	buf[3] = hexmap[byte&0xF];
+	
+	byte = ((word & 0x00FF0000) >> 16);
+	buf[4] = hexmap[(byte>>4)&0xF];
+	buf[5] = hexmap[byte&0xF];
+
+	byte = ((word & 0x0000FF00) >> 8);
+	buf[6] = hexmap[(byte>>4)&0xF];
+	buf[7] = hexmap[byte&0xF];
+	
+	byte = ((word & 0x000000FF) >> 0);
+	buf[8] = hexmap[(byte>>4)&0xF];
+	buf[9] = hexmap[byte&0xF];
+
+	prints((const char *)buf);
+}
+
+void printb(uint32_t word) {
+	prints("0b");
+	for(int i = 0; i < 32; i++) {
+		if (!(i&0x3)) {
+			usart_putc(' ');
+		}
+		usart_putc((char)(((word >> (31-i)) & 0x1) + '0'));
 	}
 }
-*/
+
+void printd(int num) {
+	return;
+}
+
+void printud(uint32_t num) {
+	return;
+}
 
 void * memset(void *b, int c, uint32_t len) {
 	for(int i = 0; i < len; i++) {
@@ -35,5 +55,9 @@ void * memset(void *b, int c, uint32_t len) {
 	return b;
 }
 
-
-
+void delay(uint32_t duration) {
+	for (int i = 0; i < duration; i++);
+}
+void exp_delay(unsigned char exp) {
+	delay(1<<exp);
+}

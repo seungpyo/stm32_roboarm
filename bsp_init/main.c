@@ -19,8 +19,8 @@ int main (void) {
 	// spi_send(SPI_DUMMY_MSG);
 	uint16_t data = 0;
 	while(1) {
-		// spi_perror();
-		// prints("\r\n");
+		spi_perror();
+		prints("\r\n");
 		spi_send(SPI_DUMMY_MSG);
 		data = spi_recv();
 		prints("Recieved: ");

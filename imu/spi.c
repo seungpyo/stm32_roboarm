@@ -6,10 +6,22 @@
 
 extern __REG spi_cs;
 
+static void spi_pfifo() {
+	prints("SPI1_TXFIFO level = ");
+	printx(spi_get_txfifo_lvl());
+	prints("\r\n");
+	prints("SPI1_RXFIFO level = ");
+	printx(spi_get_rxfifo_lvl());
+	prints("\r\n");
+
+}
+
 /**
   * In this project, we use full-duplex communication.
   */
 void spi_init() {
+	
+	spi_err_t err;
 
 	// Enable SPI1, GPIOA clock
 	*(RCC_APB2ENR) |= RCC_SPI1EN_MASK;
@@ -19,6 +31,7 @@ void spi_init() {
 	*(GPIOA_AFRL) |= GPIOA_AF_SPI1_NSS_MASK;
 	*(GPIOA_MODER) &= ~GPIO_MODE_MASK(4, GPIO_MODE_RESET);
 	*(GPIOA_MODER) |= GPIO_MODE_MASK(4, GPIO_MODE_AF);
+	*(GPIOA_PUPDR) |= GPIO_PUPD_MASK(4, GPIO_PUPD_UP);
 
 	*(GPIOA_AFRL) |= GPIOA_AF_SPI1_SCK_MASK;
 	*(GPIOA_MODER) &= ~GPIO_MODE_MASK(5, GPIO_MODE_RESET);
@@ -32,44 +45,57 @@ void spi_init() {
 	*(GPIOA_MODER) &= ~GPIO_MODE_MASK(7, GPIO_MODE_RESET);
 	*(GPIOA_MODER) |= GPIO_MODE_MASK(7, GPIO_MODE_AF);
 		
-	// Set master configuration.
-	// It seems like GPIOA should be pulled up
-	// to maintain master setting.
-	*(GPIOA_PUPDR) |= GPIO_PUPD_MASK(4, GPIO_PUPD_UP);
-
-	prints("SPI1_CR1 (GPIO PA4 Pulled up): ");
-	printb(*(SPI1_CR1));
-	prints("\r\n");
+	// Configure Baud rate
+	*(SPI1_CR1) &= ~SPI_CR1_BR_MASK;
+	*(SPI1_CR1) |= (SPI_CR1_BR_DIV4_MASK);
 
 
-	*(SPI1_CR1) |= SPI_CR1_MSTR_MASK;
-
-	prints("SPI1_CR1 (MSTR set): ");
-	printb(*(SPI1_CR1));
-	prints("\r\n");
-
-	// Enable software slave management.
-	/*
-	*(SPI1_CR1) |= SPI_CR1_SSM_MASK;
-	prints("SPI1_CR1 (SSM set): ");
-	printb(*(SPI1_CR1));
-	prints("\r\n");
-	*/
+	// configure clock polarity and phase.
+	// I don't know if these two lines are necessary.
+	// *(SPI1_CR1) |= SPI_CR1_CPOL_MASK;
+	// *(SPI1_CR1) |= SPI_CR1_CPHA_MASK;
 
 	// Reset LSBFIRST bit
 	*(SPI1_CR1) &= ~SPI_CR1_LSBFIRST_MASK;
 	
-	// Enable SPI1 after configuration.
-	*(SPI1_CR1) |= SPI_CR1_SPE_MASK;
-	
-	prints("SPI1_CR1 (SPE set): ");
-	printb(*(SPI1_CR1));
-	prints("\r\n");
+#ifdef SSM
+	// Enable software slave management.
+	*(SPI1_CR1) |= SPI_CR1_SSM_MASK;
+#endif /* SSM */
 
+	// Set Master bit
+	*(SPI1_CR1) |= SPI_CR1_MSTR_MASK;
+
+	// Enable SSOE
+	*(SPI1_CR2) |= SPI_CR2_SSOE_MASK;
+
+	// Configure FRXTH to 8-bit.
+	*(SPI1_CR2) &= SPI_CR2_FRXTH_MASK;
+
+	// We MUST set NSS high before enabling SPI.
+	// IDK why, but it works, at least.
+	spi_deselect();
+
+	// Enable SPI1 after configuration.
+	err = spi_enable();
+	if (err != SPI_ERR_OK) {
+		spi_perror(err, "enabling spi");
+	}
+	
+	prints("After spi_init():\r\n");
+	spi_pregs();
 }
 
-void spi_enable() {
+spi_err_t spi_enable() {
 	*(SPI1_CR1) |= SPI_CR1_SPE_MASK;
+	return spi_error();
+}
+
+/**
+  * Disables SPI, igonoring standard steps.
+  */
+void spi_disable_force() {
+	*(SPI1_CR1) &= ~SPI_CR1_SPE_MASK;
 }
 
 /**
@@ -80,7 +106,7 @@ void spi_disable() {
 	while(*(SPI1_SR) & SPI_SR_FTLVL) {
 		prints("txfifo not empty\r\n");	
 	}
-	while(*(SPI1_SR) * SPI_SR_BSY_MASK) {
+	while(*(SPI1_SR) & SPI_SR_BSY_MASK) {
 		prints("spi busy\r\n");
 	}
 	*(SPI1_CR1) &= ~SPI_CR1_SPE_MASK;
@@ -93,53 +119,79 @@ void spi_disable() {
 
 /**
   * To initiate SPI, we pull down NSS pin
+  * I used a quickfix; just reset SSI until MODF doesn't happen.
   */
-void spi_select() {
-	if (*(SPI1_CR1) & SPI_CR1_SSM_MASK) {
+spi_err_t spi_select() {
+		
+#ifdef SSM
+	prints("Before spi_select():\r\n");
+	spi_pregs();
+
+	spi_err_t err;
+	do {
 		*(SPI1_CR1) &= ~(SPI_CR1_SSI_MASK);
-	}
+	}  while ((err = spi_error()) == SPI_ERR_MODEFAULT);
+	
+	prints("After spi_select():\r\n");
+	spi_pregs();
+
+	return err;
+#else
+	return SPI_ERR_OK;
+#endif /* SSM */
 }	
 
 /**
   * To terminate SPI, we pull up NSS pin
   */
-void spi_deselect() {
-	if (*(SPI1_CR1) & SPI_CR1_SSM_MASK) {
-		*(SPI1_CR1) |= (SPI_CR1_SSI_MASK);
-	}
+spi_err_t spi_deselect() {
+#ifdef SSM
+	*(SPI1_CR1) |= (SPI_CR1_SSI_MASK);
+	return spi_error();
+#else
+	return SPI_ERR_OK;
+#endif /* SSM */
 }
 
 spi_err_t spi_send(uint8_t data) {
-	int bomb = 0;
+
+	prints("starting spi_send:\r\n");
+	spi_pfifo();
+
 	while(!(*(SPI1_SR) & SPI_SR_TXE_MASK));
 	*(SPI1_DR) = data;
+	
+	prints("exiting spi_send:\r\n");
+	spi_pfifo();
+
 	return spi_error();
 }
 
 spi_err_t spi_recv(uint8_t *data) {
+
+	prints("starting spi_recv:\r\n");
+	spi_pfifo();
+
 	uint8_t temp;
-	int bomb = 0;
 	while (!(*(SPI1_SR) & SPI_SR_RXNE_MASK));
+
 	temp = (uint8_t)(*(SPI1_DR));
 	if (data != NULL) {
 		*data = temp;
 	}
-	
-	/*
-	uint16_t rxfifo_lvl = 0;
-	if (spi_error() == SPI_ERR_OVERRUN) {
-		rxfifo_lvl = spi_get_rxfifo_lvl(); 
-		prints("RXFIFO overrun detected; level is\r\n");
-		printb(rxfifo_lvl);
-		prints("\r\n");
-		// temp = (uint8_t)(*(SPI1_SR));
-	}
-	*/
+		
+	prints("exiting spi_recv:\r\n");
+	spi_pfifo();
+
 	return spi_error();
 }
 
 uint16_t spi_get_rxfifo_lvl() {
 	return ((*(SPI1_SR) & SPI_SR_FRLVL) >> 9);
+}
+
+uint16_t spi_get_txfifo_lvl() {
+	return ((*(SPI1_SR) & SPI_SR_FTLVL) >> 11);
 }
 
 spi_err_t spi_error() {
@@ -169,8 +221,17 @@ void spi_perror(spi_err_t error, const char *msg) {
 		default:
 			return;
 	}
+	spi_pregs();
 	prints("\r\nSystem suspended due to SPI error.\r\n");
 	while(1);
 }
 
+void spi_pregs() {
+	prints("********************************\r\n");
+	prints("SPI1_CR1: "); printb(*SPI1_CR1); prints("\r\n");
+	prints("SPI1_CR2: "); printb(*SPI1_CR2); prints("\r\n");
+	prints("SPI1_SR:  "); printb(*SPI1_SR); prints("\r\n");
+	prints("SPI1_DR:  "); printb(*SPI1_DR); prints("\r\n");
+	prints("********************************\r\n");
+}
 #endif /* _SPI_H */

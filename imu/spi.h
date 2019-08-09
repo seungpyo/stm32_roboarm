@@ -2,6 +2,8 @@
 #include "regs.h"
 #include "usart.h"
 
+// #define SSM
+
 #define SPI_DUMMY_MSG 0xFFFF
 
 // BSY flag is excluded in this mask
@@ -25,13 +27,18 @@ volatile uint32_t * spi_cs;
 
 void spi_init();
 
-void spi_select();
-void spi_deselect();
+spi_err_t spi_enable();
+void spi_disable();
+void spi_disable_force();
+
+spi_err_t spi_select();
+spi_err_t spi_deselect();
 
 spi_err_t spi_send(uint8_t data);
 spi_err_t spi_recv(uint8_t *data);
 
 uint16_t spi_get_rxfifo_lvl();
-
+uint16_t spi_get_txfifo_lvl();
 spi_err_t spi_error();
 void spi_perror(spi_err_t error, const char * msg);
+void spi_pregs();

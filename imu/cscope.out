@@ -1,4 +1,4 @@
-cscope 15 $HOME/stm32_roboarm/imu               0002516865
+cscope 15 $HOME/stm32_roboarm/imu               0002517962
 	@irq.c
 
 1 
@@ -369,64 +369,20 @@ buf
 	~"•i.h
 "
 
-4 
+3 
+	~"utûs.h
+"
+
+5 
 	$mpu9250_öô
 () {
-
-5 
-•i_îr_t
- 
-îr
-;
-
-6 
-îr
- = 
-	`•i_£nd
-(
-MPU9250_PWR_MGMT1
- | 
-MPU9250_WRITE_MASK
-);
-
-7 i‡(
-îr
- !
-SPI_ERR_OK
-) {
-
-8 
-	`•i_≥º‹
-(
-îr
-, "while sendingÖwr_mgmt");
-
-10 
-îr
- = 
-	`•i_£nd
-(
-MPU9250_PWR_MGMT1_H_RESET
-);
-
-11 i‡(
-îr
- !
-SPI_ERR_OK
-) {
-
-12 
-	`•i_≥º‹
-(
-îr
-, "while sendingÑeset sign");
 
 14 
 	}
 }
 
 16 
-uöt8_t
+•i_îr_t
  
 	$mpu9250_wrôe
 (
@@ -435,6 +391,8 @@ uöt8_t
 addr
 , uöt8_à
 d©a
+, uöt8_à* 
+ª•⁄£
 ) {
 
 17 
@@ -444,16 +402,10 @@ d©a
 ;
 
 18 
-uöt8_t
- 
-ª•⁄£
- = 0x0;
-
-19 
 	`•i_£À˘
 ();
 
-21 
+20 
 îr
  = 
 	`•i_£nd
@@ -463,50 +415,52 @@ addr
 MPU9250_WRITE_MASK
 );
 
-22 i‡(
+21 i‡(
 îr
  !
 SPI_ERR_OK
 ) {
 
-23 
+22 
 	`•i_≥º‹
 (
 îr
 , "In mpu9250_write, sendingáddress");
 
-25 
+23  
+îr
+;
+
+26 
+îr
+ = 
 	`•i_ªcv
 (
 NULL
 );
 
-27 
-îr
- = 
-	`•i_£nd
-(
-d©a
-);
-
-28 i‡(
+27 i‡(
 îr
  !
 SPI_ERR_OK
 ) {
 
-29 
+28 
 	`•i_≥º‹
 (
 îr
-, "In mpu9250_write, sending data");
+, "In mpu9250_write,Ñeceiving dummy");
+
+29  
+îr
+;
 
 32 
 îr
  = 
-	`•i_ªcv
-(&
-ª•⁄£
+	`•i_£nd
+(
+d©a
 );
 
 33 i‡(
@@ -519,47 +473,71 @@ SPI_ERR_OK
 	`•i_≥º‹
 (
 îr
+, "In mpu9250_write, sending data");
+
+35  
+îr
+;
+
+38 
+îr
+ = 
+	`•i_ªcv
+(
+ª•⁄£
+);
+
+39 i‡(
+îr
+ !
+SPI_ERR_OK
+) {
+
+40 
+	`•i_≥º‹
+(
+îr
 , "In mpu9250_write,Ñeceiving");
 
-37 
+41  
+îr
+;
+
+44 
 	`•i_de£À˘
 ();
 
-38  
-ª•⁄£
+46  
+SPI_ERR_OK
 ;
 
-39 
+47 
 	}
 }
 
-41 
-uöt8_t
+49 
+•i_îr_t
  
 	$mpu9250_ªad
 (
 uöt8_t
  
 addr
+, uöt8_à*
+ª•⁄£
 ) {
 
-42 
+50 
 •i_îr_t
  
 îr
 ;
 
-43 
-uöt8_t
- 
-ª•⁄£
- = 0x0;
-
-44 
+51 
 	`•i_£À˘
 ();
 
-46 
+53 
 îr
  = 
 	`•i_£nd
@@ -569,69 +547,97 @@ addr
 MPU9250_READ_MASK
 );
 
-47 i‡(
+54 i‡(
 îr
  !
 SPI_ERR_OK
 ) {
 
-48 
+55 
 	`•i_≥º‹
 (
 îr
 , "In mpu9250_read, sendingáddress");
 
-50 
+56  
+îr
+;
+
+58 
 îr
  = 
 	`•i_ªcv
-(&
+(
 ª•⁄£
 );
 
-51 i‡(
+59 i‡(
 îr
  !
 SPI_ERR_OK
 ) {
 
-52 
+60 
 	`•i_≥º‹
 (
 îr
 , "In mpu9250_read,Ñeceiving");
 
-55 
+61  
+îr
+;
+
+64 
 	`•i_de£À˘
 ();
 
-56  
-ª•⁄£
+65  
+SPI_ERR_OK
 ;
 
-57 
+66 
 	}
 }
 
-59 
+68 
 uöt8_t
  
 	$mpu9250_ªad_whﬂmi
 () {
 
-60 
+69 
 uöt8_t
  
 d©a
+, 
+dummy
 ;
 
-61 
+70 
 •i_îr_t
  
 îr
 ;
 
-62 
+72 
+îr
+ = 
+	`•i_£À˘
+();
+
+73 i‡(
+îr
+ !
+SPI_ERR_OK
+) {
+
+74 
+	`•i_≥º‹
+(
+îr
+, "In mpu9250_read_whoami, selecting");
+
+77 
 îr
  = 
 	`•i_£nd
@@ -641,57 +647,67 @@ MPU9250_WHO_AM_I
 MPU9250_READ_MASK
 );
 
-63 i‡(
+78 i‡(
 îr
  !
 SPI_ERR_OK
 ) {
 
-64 
+79 
 	`•i_≥º‹
 (
 îr
 , "In mpu9250_read_whoami, sendingáddress");
 
-66 
+81 
 îr
  = 
 	`•i_ªcv
-(
-NULL
+(&
+dummy
 );
 
-67 i‡(
+82 i‡(
 îr
  !
 SPI_ERR_OK
 ) {
 
-68 
+83 
 	`•i_≥º‹
 (
 îr
 , "In mpu9250_read_whoami,Ñeceiving dummy");
 
-70 
+86 
+	`¥ötx
+(
+dummy
+);
+
+87 
+	`¥öts
+("Ñeceivedás dummy\r\n");
+
+89 
 îr
  = 
 	`•i_£nd
 (0);
 
-71 i‡(
+90 i‡(
 îr
  !
 SPI_ERR_OK
 ) {
 
-72 
+91 
 	`•i_≥º‹
 (
 îr
 , "In mpu9250_read_whoami, sending dummy");
 
-74 
+93 
 îr
  = (
 uöt16_t
@@ -701,23 +717,41 @@ uöt16_t
 d©a
 );
 
-75 i‡(
+94 i‡(
 îr
  !
 SPI_ERR_OK
 ) {
 
-76 
+95 
 	`•i_≥º‹
 (
 îr
 , "In mpu9250_read_whoami,Ñeceiving Device ID");
 
-79  
+98 
+îr
+ = 
+	`•i_de£À˘
+();
+
+99 i‡(
+îr
+ !
+SPI_ERR_OK
+) {
+
+100 
+	`•i_≥º‹
+(
+îr
+, "In mpu9250_read_whoami, deselecting");
+
+102  
 d©a
 ;
 
-80 
+103 
 	}
 }
 
@@ -737,71 +771,83 @@ _MPU9250_H
 	~"ªgs.h
 "
 
-6 
+5 
+	~"•i.h
+"
+
+7 
 	#MPU9250_WRITE_MASK
  0x00
 
 	)
 
-7 
+8 
 	#MPU9250_READ_MASK
  0x80
 
 	)
 
-9 
+10 
 	#MPU9250_ACCEL_XOUT_H
  0x3B
 
 	)
 
-10 
+11 
 	#MPU9250_ACCEL_XOUT_L
  0x3C
 
 	)
 
-12 
+13 
 	#MPU9250_WHO_AM_I
  0x75
 
 	)
 
-14 
+15 
 	#MPU9250_PWR_MGMT1
  0x6B
 
 	)
 
-15 
+16 
 	#MPU9250_PWR_MGMT1_H_RESET
  0x80
 
 	)
 
-17 
+18 
 mpu9250_öô
 ();
 
-18 
-uöt8_t
+19 
+•i_îr_t
  
 mpu9250_wrôe
-(uöt8_à
+(
+uöt8_t
+ 
 addr
 , uöt8_à
 d©a
-);
-
-19 
-uöt8_t
- 
-mpu9250_ªad
-(uöt8_à
-addr
+, uöt8_à*
+ª•⁄£
 );
 
 20 
+•i_îr_t
+ 
+mpu9250_ªad
+(
+uöt8_t
+ 
+addr
+, uöt8_à*
+ª•⁄£
+);
+
+21 
 uöt8_t
  
 mpu9250_ªad_whﬂmi
@@ -996,6 +1042,16 @@ GPIOA
 	)
 
 48 
+	#GPIOA_BSRR
+ ((
+__REG
+)(
+GPIOA
++0x18))
+
+	)
+
+49 
 	#GPIOA_AFRL
  ((
 __REG
@@ -1005,7 +1061,17 @@ GPIOA
 
 	)
 
-49 
+50 
+	#GPIOA_BRR
+ ((
+__REG
+)(
+GPIOA
++0x28))
+
+	)
+
+51 
 	#GPIOA_AF_USART2_TX_MASK
  
 	`GPIO_AF_MASK
@@ -1013,7 +1079,7 @@ GPIOA
 
 	)
 
-50 
+52 
 	#GPIOA_AF_USART2_RX_MASK
  
 	`GPIO_AF_MASK
@@ -1021,7 +1087,7 @@ GPIOA
 
 	)
 
-51 
+53 
 	#GPIOA_AF_SPI1_NSS_MASK
  
 	`GPIO_AF_MASK
@@ -1029,7 +1095,7 @@ GPIOA
 
 	)
 
-52 
+54 
 	#GPIOA_AF_SPI1_SCK_MASK
  
 	`GPIO_AF_MASK
@@ -1037,7 +1103,7 @@ GPIOA
 
 	)
 
-53 
+55 
 	#GPIOA_AF_SPI1_MISO_MASK
  
 	`GPIO_AF_MASK
@@ -1045,7 +1111,7 @@ GPIOA
 
 	)
 
-54 
+56 
 	#GPIOA_AF_SPI1_MOSI_MASK
  
 	`GPIO_AF_MASK
@@ -1053,7 +1119,7 @@ GPIOA
 
 	)
 
-57 
+59 
 	#GPIOC_MODER
  ((
 __REG
@@ -1063,7 +1129,7 @@ GPIOC
 
 	)
 
-58 
+60 
 	#GPIOC_OTYPER
  ((
 __REG
@@ -1073,7 +1139,7 @@ GPIOC
 
 	)
 
-59 
+61 
 	#GPIOC_BSRR
  ((
 __REG
@@ -1083,7 +1149,7 @@ GPIOC
 
 	)
 
-60 
+62 
 	#GPIOC_BRR
  ((
 __REG
@@ -1093,7 +1159,7 @@ GPIOC
 
 	)
 
-63 
+65 
 	#GPIOD_AFRL
  ((
 __REG
@@ -1103,7 +1169,7 @@ GPIOD
 
 	)
 
-66 
+68 
 	#RCC_APB1ENR1
  ((
 __REG
@@ -1111,7 +1177,7 @@ __REG
 
 	)
 
-67 
+69 
 	#RCC_APB2ENR
  ((
 __REG
@@ -1119,7 +1185,7 @@ __REG
 
 	)
 
-68 
+70 
 	#RCC_AHB2ENR
  ((
 __REG
@@ -1127,7 +1193,7 @@ __REG
 
 	)
 
-69 
+71 
 	#RCC_CCIPR
  ((
 __REG
@@ -1135,55 +1201,55 @@ __REG
 
 	)
 
-72 
+74 
 	#RCC_USART2EN_MASK
  (0x00020000)
 
 	)
 
-73 
+75 
 	#RCC_GPIOAEN_MASK
  (0x00000001)
 
 	)
 
-74 
+76 
 	#RCC_GPIOBEN_MASK
  (0x00000002)
 
 	)
 
-75 
+77 
 	#RCC_GPIOCEN_MASK
  (0x00000004)
 
 	)
 
-76 
+78 
 	#RCC_GPIODEN_MASK
  (0x00000008)
 
 	)
 
-77 
+79 
 	#RCC_USART2SEL_MASK
  (0x0000000C)
 
 	)
 
-78 
+80 
 	#RCC_SPI1EN_MASK
  (0x00001000)
 
 	)
 
-81 
+83 
 	#SPI1
  (0x40013000)
 
 	)
 
-82 
+84 
 	#SPI1_CR1
  ((
 __REG
@@ -1193,7 +1259,7 @@ SPI1
 
 	)
 
-83 
+85 
 	#SPI1_CR2
  ((
 __REG
@@ -1203,7 +1269,7 @@ SPI1
 
 	)
 
-84 
+86 
 	#SPI1_SR
  ((
 __REG
@@ -1213,7 +1279,7 @@ SPI1
 
 	)
 
-85 
+87 
 	#SPI1_DR
  ((
 __REG
@@ -1223,115 +1289,139 @@ SPI1
 
 	)
 
-88 
-	#SPI_CR1_RXONLY_MASK
- (0x00000400)
-
-	)
-
-89 
-	#SPI_CR1_SSM_MASK
- (0x00000200)
-
-	)
-
 90 
-	#SPI_CR1_SSI_MASK
- (0x00000100)
+	#SPI_CR1_RXONLY_MASK
+ (0x0400)
 
 	)
 
 91 
-	#SPI_CR1_LSBFIRST_MASK
- (0x00000080)
+	#SPI_CR1_SSM_MASK
+ (0x0200)
 
 	)
 
 92 
-	#SPI_CR1_SPE_MASK
- (0x00000040)
+	#SPI_CR1_SSI_MASK
+ (0x0100)
 
 	)
 
 93 
-	#SPI_CR1_BR_MASK
- (0x00000038)
+	#SPI_CR1_LSBFIRST_MASK
+ (0x0080)
 
 	)
 
 94 
-	#SPI_CR1_MSTR_MASK
- (0x00000004)
+	#SPI_CR1_SPE_MASK
+ (0x0040)
 
 	)
 
 95 
-	#SPI_CR1_BR_DIV2_MASK
- (0x00000000)
+	#SPI_CR1_BR_MASK
+ (0x0038)
 
 	)
 
 96 
-	#SPI_CR1_BR_DIV4_MASK
- (0x00000008)
+	#SPI_CR1_MSTR_MASK
+ (0x0004)
 
 	)
 
 97 
-	#SPI_CR1_BR_DIV8_MASK
- (0x00000010)
+	#SPI_CR1_CPOL_MASK
+ (0x0002)
 
 	)
 
 98 
-	#SPI_CR1_BR_DIV16_MASK
- (0x00000018)
+	#SPI_CR1_CPHA_MASK
+ (0x0001)
+
+	)
+
+99 
+	#SPI_CR1_BR_DIV2_MASK
+ (0x0000)
 
 	)
 
 100 
-	#SPI_SR_BSY_MASK
- (0x00000080)
+	#SPI_CR1_BR_DIV4_MASK
+ (0x0008)
 
 	)
 
 101 
-	#SPI_SR_OVR_MASK
- (0x00000400)
+	#SPI_CR1_BR_DIV8_MASK
+ (0x0010)
 
 	)
 
 102 
-	#SPI_SR_MODF_MASK
- (0x00000020)
-
-	)
-
-103 
-	#SPI_SR_CRCERR_MASK
- (0x00000010)
+	#SPI_CR1_BR_DIV16_MASK
+ (0x0018)
 
 	)
 
 104 
-	#SPI_SR_TXE_MASK
- (0x00000002)
+	#SPI_SR_FTLVL
+ (0x1800)
 
 	)
 
 105 
-	#SPI_SR_RXNE_MASK
- (0x00000001)
+	#SPI_SR_FRLVL
+ (0x0600)
+
+	)
+
+106 
+	#SPI_SR_BSY_MASK
+ (0x0080)
+
+	)
+
+107 
+	#SPI_SR_OVR_MASK
+ (0x0400)
+
+	)
+
+108 
+	#SPI_SR_MODF_MASK
+ (0x0020)
 
 	)
 
 109 
+	#SPI_SR_CRCERR_MASK
+ (0x0010)
+
+	)
+
+110 
+	#SPI_SR_TXE_MASK
+ (0x0002)
+
+	)
+
+111 
+	#SPI_SR_RXNE_MASK
+ (0x0001)
+
+	)
+
+116 
 	#USART2
  (0x40004400)
 
 	)
 
-110 
+117 
 	#USART2_CR1
  ((
 __REG
@@ -1341,7 +1431,7 @@ USART2
 
 	)
 
-111 
+118 
 	#USART2_BRR
  ((
 __REG
@@ -1351,7 +1441,7 @@ USART2
 
 	)
 
-112 
+119 
 	#USART2_ISR
  ((
 __REG
@@ -1361,7 +1451,7 @@ USART2
 
 	)
 
-113 
+120 
 	#USART2_RDR
  ((
 __REG
@@ -1371,7 +1461,7 @@ USART2
 
 	)
 
-114 
+121 
 	#USART2_TDR
  ((
 __REG
@@ -1381,25 +1471,25 @@ USART2
 
 	)
 
-116 
+123 
 	#USART_CR1_UE_MASK
  0x1
 
 	)
 
-117 
+124 
 	#USART_CR1_RE_MASK
  0x4
 
 	)
 
-118 
+125 
 	#USART_CR1_TE_MASK
  0x8
 
 	)
 
-119 
+126 
 	#USART_CR1_TXEIE_MASK
  ((
 uöt16_t
@@ -1407,7 +1497,7 @@ uöt16_t
 
 	)
 
-120 
+127 
 	#USART_ISR_TXE_MASK
  ((
 uöt16_t
@@ -1415,7 +1505,7 @@ uöt16_t
 
 	)
 
-121 
+128 
 	#USART_ISR_RXNE_MASK
  ((
 uöt16_t
@@ -1487,13 +1577,21 @@ GPIOA_MODER
 GPIO_MODE_AF
 );
 
-23 *(
+22 *(
+GPIOA_PUPDR
+Ë|
+	`GPIO_PUPD_MASK
+(4, 
+GPIO_PUPD_UP
+);
+
+24 *(
 GPIOA_AFRL
 Ë|
 GPIOA_AF_SPI1_SCK_MASK
 ;
 
-24 *(
+25 *(
 GPIOA_MODER
 Ë&~
 	`GPIO_MODE_MASK
@@ -1501,7 +1599,7 @@ GPIOA_MODER
 GPIO_MODE_RESET
 );
 
-25 *(
+26 *(
 GPIOA_MODER
 Ë|
 	`GPIO_MODE_MASK
@@ -1509,13 +1607,13 @@ GPIOA_MODER
 GPIO_MODE_AF
 );
 
-27 *(
+28 *(
 GPIOA_AFRL
 Ë|
 GPIOA_AF_SPI1_MISO_MASK
 ;
 
-28 *(
+29 *(
 GPIOA_MODER
 Ë&~
 	`GPIO_MODE_MASK
@@ -1523,7 +1621,7 @@ GPIOA_MODER
 GPIO_MODE_RESET
 );
 
-29 *(
+30 *(
 GPIOA_MODER
 Ë|
 	`GPIO_MODE_MASK
@@ -1531,13 +1629,13 @@ GPIOA_MODER
 GPIO_MODE_AF
 );
 
-31 *(
+32 *(
 GPIOA_AFRL
 Ë|
 GPIOA_AF_SPI1_MOSI_MASK
 ;
 
-32 *(
+33 *(
 GPIOA_MODER
 Ë&~
 	`GPIO_MODE_MASK
@@ -1545,7 +1643,7 @@ GPIOA_MODER
 GPIO_MODE_RESET
 );
 
-33 *(
+34 *(
 GPIOA_MODER
 Ë|
 	`GPIO_MODE_MASK
@@ -1554,118 +1652,218 @@ GPIO_MODE_AF
 );
 
 38 *(
-GPIOA_PUPDR
-Ë|
-	`GPIO_PUPD_MASK
-(4, 
-GPIO_PUPD_UP
-);
-
-40 
-	`¥öts
-("SPI1_CR1 (GPIO PA4 Pulled up): ");
-
-41 
-	`¥ötb
-(*(
-SPI1_CR1
-));
-
-42 
-	`¥öts
-("\r\n");
-
-45 *(
 SPI1_CR1
 Ë|
-SPI_CR1_MSTR_MASK
+SPI_CR1_CPOL_MASK
 ;
 
-47 
-	`¥öts
-("SPI1_CR1 (MSTR set): ");
-
-48 
-	`¥ötb
-(*(
+39 *(
 SPI1_CR1
-));
+Ë|
+SPI_CR1_CPHA_MASK
+;
 
-49 
-	`¥öts
-("\r\n");
-
-59 *(
+42 *(
 SPI1_CR1
 Ë&~
 SPI_CR1_LSBFIRST_MASK
 ;
 
-62 *(
+45 *(
 SPI1_CR1
 Ë|
-SPI_CR1_SPE_MASK
+SPI_CR1_SSM_MASK
 ;
 
-64 
+46 
 	`¥öts
-("SPI1_CR1 (SPE set): ");
+("SPI1_CR1 (SSM set): ");
 
-65 
+47 
 	`¥ötb
 (*(
 SPI1_CR1
 ));
 
-66 
+48 
 	`¥öts
 ("\r\n");
 
-68 
+51 *(
+SPI1_CR1
+Ë|
+SPI_CR1_MSTR_MASK
+;
+
+52 
+	`¥öts
+("SPI1_CR1 (MSTR set): ");
+
+53 
+	`¥ötb
+(*(
+SPI1_CR1
+));
+
+54 
+	`¥öts
+("\r\n");
+
+58 
+	`•i_de£À˘
+();
+
+61 
+	`•i_íabÀ
+();
+
+62 
 	}
 }
 
-73 
+64 
+	$•i_íabÀ
+() {
+
+65 *(
+SPI1_CR1
+Ë|
+SPI_CR1_SPE_MASK
+;
+
+66 
+	}
+}
+
+71 
+	$•i_dißbÀ_f‹˚
+() {
+
+72 *(
+SPI1_CR1
+Ë&~
+SPI_CR1_SPE_MASK
+;
+
+73 
+	}
+}
+
+79 
+	$•i_dißbÀ
+() {
+
+80 *(
+SPI1_SR
+Ë& 
+SPI_SR_FTLVL
+) {
+
+81 
+	`¥öts
+("txfifoÇotÉmpty\r\n");
+
+83 *(
+SPI1_SR
+Ë* 
+SPI_SR_BSY_MASK
+) {
+
+84 
+	`¥öts
+("spi busy\r\n");
+
+86 *(
+SPI1_CR1
+Ë&~
+SPI_CR1_SPE_MASK
+;
+
+87 
+uöt16_t
+ 
+bœckhﬁe
+;
+
+88 *(
+SPI1_SR
+Ë& 
+SPI_SR_FRLVL
+) {
+
+89 
+	`¥öts
+("rxfifoÇotÉmpty\r\n");
+
+90 
+bœckhﬁe
+ = *(
+SPI1_DR
+);
+
+92 
+	}
+}
+
+97 
+•i_îr_t
+ 
 	$•i_£À˘
 () {
 
-74 i‡(*(
-SPI1_CR1
-Ë& 
-SPI_CR1_SSM_MASK
-) {
+99 
+•i_îr_t
+ 
+îr
+;
 
-75 *(
+101 
+	`¥öts
+("Resetting SSI...\r\n");
+
+102 *(
 SPI1_CR1
 Ë&~(
 SPI_CR1_SSI_MASK
 );
 
-77 
+103 } (
+îr
+ = 
+	`•i_îr‹
+()Ë=
+SPI_ERR_MODEFAULT
+);
+
+105  
+îr
+;
+
+106 
 	}
 }
 
-82 
+111 
+•i_îr_t
+ 
 	$•i_de£À˘
 () {
 
-83 i‡(*(
-SPI1_CR1
-Ë& 
-SPI_CR1_SSM_MASK
-) {
-
-84 *(
+112 *(
 SPI1_CR1
 Ë|(
 SPI_CR1_SSI_MASK
 );
 
-86 
+113  
+	`•i_îr‹
+();
+
+114 
 	}
 }
 
-89 
+116 
 •i_îr_t
  
 	$•i_£nd
@@ -1675,39 +1873,31 @@ uöt8_t
 d©a
 ) {
 
-90 
-bomb
- = 0;
-
-91 !(*(
+117 !(*(
 SPI1_SR
 Ë& 
 SPI_SR_TXE_MASK
 )) {
 
-92 i‡(
-bomb
-++>10) {
-
-93 
+118 
 	`¥öts
-("InfiniteÜoop detected whileÖolling SPI TXE\r\n");
+("TXEÖolling...\r\n");
 
-97 *(
+120 *(
 SPI1_DR
 Ë
 d©a
 ;
 
-98  
+121  
 	`•i_îr‹
 ();
 
-99 
+122 
 	}
 }
 
-101 
+124 
 •i_îr_t
  
 	$•i_ªcv
@@ -1717,31 +1907,23 @@ uöt8_t
 d©a
 ) {
 
-102 
+125 
 uöt8_t
  
 ãmp
 ;
 
-103 
-bomb
- = 0;
-
-104 !(*(
+126 !(*(
 SPI1_SR
 Ë& 
 SPI_SR_RXNE_MASK
 )) {
 
-105 i‡(
-bomb
-++>10) {
-
-106 
+127 
 	`¥öts
-("InfiniteÜoop detected whileÖolling SPI RXNE\r\n");
+("RXNEÖolling...\r\n");
 
-110 
+129 
 ãmp
  = (
 uöt8_t
@@ -1749,33 +1931,49 @@ uöt8_t
 SPI1_DR
 ));
 
-111 i‡(
+130 i‡(
 d©a
  !
 NULL
 ) {
 
-112 *
+131 *
 d©a
  = 
 ãmp
 ;
 
-114  
+144  
 	`•i_îr‹
 ();
 
-115 
+145 
 	}
 }
 
-117 
+147 
+uöt16_t
+ 
+	$•i_gë_rxfifo_lvl
+() {
+
+148  ((*(
+SPI1_SR
+Ë& 
+SPI_SR_FRLVL
+) >> 9);
+
+149 
+	}
+}
+
+151 
 •i_îr_t
  
 	$•i_îr‹
 () {
 
-118 
+152 
 uöt32_t
  
 øw
@@ -1785,7 +1983,7 @@ SPI1_SR
 SPI_SR_ERR_MASK
 ;
 
-119 
+153 
 uöt8_t
  
 îr‹
@@ -1795,15 +1993,15 @@ uöt8_t
 SPI_SR_ERR_MASK
 ) >> 4);
 
-120  
+154  
 îr‹
 ;
 
-121 
+155 
 	}
 }
 
-123 
+157 
 	$•i_≥º‹
 (
 •i_îr_t
@@ -1813,69 +2011,69 @@ SPI_SR_ERR_MASK
 msg
 ) {
 
-125 
+159 
 	`¥öts
 (
 msg
 );
 
-126 
+160 
 	`¥öts
 ("\r\n");
 
-127 
+161 
 	`¥öts
 ("SPI Error: ");
 
-129 
+163 
 îr‹
 ) {
 
-130 
+164 
 SPI_ERR_FRAME
 :
 
-131 
+165 
 	`¥öts
 (
 SPI_ERRMSG_FRAME
 );
 
-133 
+167 
 SPI_ERR_OVERRUN
 :
 
-134 
+168 
 	`¥öts
 (
 SPI_ERRMSG_OVERRUN
 );
 
-136 
+170 
 SPI_ERR_MODEFAULT
 :
 
-137 
+171 
 	`¥öts
 (
 SPI_ERRMSG_MODEFAULT
 );
 
-139 
+173 
 SPI_ERR_CRC
 :
 
-140 
+174 
 	`¥öts
 (
 SPI_ERRMSG_CRC
 );
 
-144 
+178 
 	`¥öts
 ("\r\nSystem suspended dueÅo SPIÉrror.\r\n");
 
-146 
+180 
 	}
 }
 
@@ -1994,14 +2192,30 @@ uöt32_t
 ();
 
 28 
-•i_£À˘
+•i_íabÀ
 ();
 
 29 
+•i_dißbÀ
+();
+
+30 
+•i_dißbÀ_f‹˚
+();
+
+32 
+•i_îr_t
+ 
+•i_£À˘
+();
+
+33 
+•i_îr_t
+ 
 •i_de£À˘
 ();
 
-31 
+35 
 •i_îr_t
  
 •i_£nd
@@ -2011,7 +2225,7 @@ uöt8_t
 d©a
 );
 
-32 
+36 
 •i_îr_t
  
 •i_ªcv
@@ -2021,13 +2235,19 @@ uöt8_t
 d©a
 );
 
-34 
+38 
+uöt16_t
+ 
+•i_gë_rxfifo_lvl
+();
+
+40 
 •i_îr_t
  
 •i_îr‹
 ();
 
-35 
+41 
 •i_≥º‹
 (
 •i_îr_t
